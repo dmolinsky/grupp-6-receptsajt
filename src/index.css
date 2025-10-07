@@ -1,0 +1,141 @@
+/* -----COLOR PALETTE VARIABLES----- */
+:root {
+    --color-dark: #202020;
+    --color-green: #11361b;
+    --color-red: #5d1c1c;
+    --color-light: #ebdedf;
+    --color-bg: #f5f5f5;
+}
+
+/* -----TYPOGRAPHY VARIABLES----- */
+:root {
+    --font-heading: 'Merriweather', serif;
+    --font-body: 'Open Sans', sans-serif;
+}
+
+/* -----SPACING VARIABLES----- */
+/*
+xs: Extra small — for small icons or button margins
+sm: Standard spacing — for paragraphs or space between headings and text
+md: Medium spacing — for sections or images
+lg: Large spacing — for big sections like top and bottom areas on the homepage
+max-width: Maximum content width — prevents text lines from becoming too wide on large screens
+*/
+
+:root {
+    /* Mobile*/
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --max-width: 100%;
+}
+
+/* iPad / tablets */
+@media (min-width: 768px) {
+    :root {
+        --spacing-md: 2rem;
+        --spacing-lg: 3rem;
+        --max-width: 900px;
+    }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+    :root {
+        --spacing-md: 2.5rem;
+        --spacing-lg: 4rem;
+        --max-width: 1200px;
+    }
+}
+
+/* -----BASE STYLING----- */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--color-bg);
+}
+
+/* -----TYPOGRAPHY----- */
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-family: var(--font-heading);
+    color: var(--color-green);
+    margin-bottom: var(--spacing-sm);
+}
+
+p {
+    font-family: var(--font-body);
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-dark);
+}
+
+/* -----LINKS----- */
+a {
+    color: var(--color-dark);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--color-red);
+}
+
+/* -----BUTTONS----- */
+button {
+    font-family: var(--font-body);
+    background-color: var(--color-green);
+    color: var(--color-dark);
+    border: none;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    opacity: 0.2;
+    transition: opacity 0.2s ease;
+}
+
+button:hover {
+    opacity: 0.7;
+}
+
+/* -----LAYOUT----- */
+.container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--spacing-sm);
+}
+
+/* -----UTILITY----- */
+.text-center {
+    text-align: center;
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.grid {
+    display: grid;
+    gap: var(--spacing-md);
+}
+
+/* Small rounded corners */
+.round-sm {
+    border-radius: 4px;
+}
+
+/* Medium rounded corners */
+.round-md {
+    border-radius: 8px;
+}
+
+/* Large rounded corners */
+.round-lg {
+    border-radius: 16px;
+}
