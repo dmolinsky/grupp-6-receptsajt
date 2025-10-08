@@ -13,7 +13,10 @@ function App() {
             <main className="container">
                 <Routes>
                     <Route path="/" element={<Home />} />
-                    <Route path="/category/:categoryId" element={<CategoryPage />} />
+                    <Route
+                        path="/category/:categoryId"
+                        element={<CategoryPage />}
+                    />
                     <Route path="/recipe/:recipeId" element={<RecipePage />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
