@@ -6,9 +6,15 @@ function Header() {
         <header className="header">
             <h1>Julreceptsajten</h1>
             <nav className="nav">
-                <Link to="/" className="button">Hem</Link>
-                <Link to="/category/:categoryId" className="button">Kategorier</Link>
-                <Link to="/recipe/:recipeId" className="button">Recept</Link>
+                <Link to="/" className="button">
+                    Hem
+                </Link>
+                <Link to="/category/:categoryId" className="button">
+                    Kategorier
+                </Link>
+                <Link to="/recipe/:recipeId" className="button">
+                    Recept
+                </Link>
             </nav>
         </header>
     );
