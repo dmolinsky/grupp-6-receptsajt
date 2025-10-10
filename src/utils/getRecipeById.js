@@ -1,9 +1,7 @@
 const url = 'https://grupp6-rbwot.reky.se/recipes/';
 
 export async function getRecipeById(id) {
-
     try {
-
         const response = await fetch(`${url}${id}`);
 
         if (!response.ok) {
