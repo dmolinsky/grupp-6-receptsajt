@@ -1,7 +1,9 @@
+import RecipeGrid from "../../components/RecipeGrid/RecipeGrid";
+
 function Home() {
     return (
-        <main>
-            <p>Home Page</p>
+        <main className="home">
+            <RecipeGrid />
         </main>
     );
 }
