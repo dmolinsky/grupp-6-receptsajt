@@ -13,4 +13,7 @@ function RecipeGrid() {
 }
 
 export default RecipeGrid;
+<<<<<<< HEAD
 	
+=======
+>>>>>>> 72973dd (EDIT formatted by Prettier)
