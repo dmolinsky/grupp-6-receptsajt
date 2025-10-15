@@ -46,4 +46,7 @@ function RecipeGrid({ category = null, searchQuery = null }) {
     );
 }
 
+export default RecipeGrid;
+
+
 
