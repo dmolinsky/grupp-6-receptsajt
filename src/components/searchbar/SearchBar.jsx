@@ -14,8 +14,8 @@ function SearchBar() {
 
     const handleChange = (e) => {
         setQuery(e.target.value);
-        if (error) setError("");
-    }
+        if (error) setError('');
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -26,24 +26,26 @@ function SearchBar() {
     const clearAll = () => {
         setQuery('');
         setError('');
-    }
+    };
 
     const hasValue = query.trim().length > 0;
     const hasError = !!error;
-
 
     return (
         <form
             role="search"
             aria-label="Sök bland recept"
             noValidate
-            className={`searchbar ${hasValue ? "searchbar--has-value" : ""} ${
-                hasError ? "searchbar--error" : ""
+            className={`searchbar ${hasValue ? 'searchbar--has-value' : ''} ${
+                hasError ? 'searchbar--error' : ''
             }`}
             onSubmit={handleSubmit}
         >
-
-            <svg className="searchbar__icon" viewBox="0 0 24 24" aria-hidden="true">
+            <svg
+                className="searchbar__icon"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+            >
                 <path
                     fill="currentColor"
                     d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.71.71l.27.28v.79L20 20.5 20.5 20l-5-6zM10 15.5a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11z"
@@ -56,7 +58,7 @@ function SearchBar() {
                 placeholder="Sök bland dina favoritrecept"
                 value={query}
                 onChange={handleChange}
-                aria-invalid={hasError ? "true" : "false"}
+                aria-invalid={hasError ? 'true' : 'false'}
             />
 
             <button
@@ -69,7 +71,11 @@ function SearchBar() {
             </button>
 
             {hasError && (
-                <p id="searchbar-error" className="searchbar__error" role="alert">
+                <p
+                    id="searchbar-error"
+                    className="searchbar__error"
+                    role="alert"
+                >
                     {error}
                 </p>
             )}
