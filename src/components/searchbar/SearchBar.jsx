@@ -3,7 +3,6 @@ import { useState } from 'react';
 function SearchBar() {
     const [query, setQuery] = useState('');
     const [error, setError] = useState('');
-    const [message, setMessage] = useState('');
 
     const validate = (value) => {
         const v = value.trim();
@@ -13,53 +12,73 @@ function SearchBar() {
         return '';
     };
 
+    const handleChange = (e) => {
+        setQuery(e.target.value);
+        if (error) setError('');
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
         const err = validate(query);
         setError(err);
-        if (err) {
-            setMessage('');
-            return;
-        }
-        setMessage('Sökte efter: ' + query);
-        setQuery('');
     };
+
+    const clearAll = () => {
+        setQuery('');
+        setError('');
+    };
+
+    const hasValue = query.trim().length > 0;
+    const hasError = !!error;
 
     return (
         <form
-            onSubmit={handleSubmit}
-            className="field"
             role="search"
-            aria-label="Sök recept"
+            aria-label="Sök bland recept"
+            noValidate
+            className={`searchbar ${hasValue ? 'searchbar--has-value' : ''} ${
+                hasError ? 'searchbar--error' : ''
+            }`}
+            onSubmit={handleSubmit}
         >
-            <input
-                className="input"
-                type="search"
-                placeholder="Sök bland recept..."
-                value={query}
-                onChange={(e) => {
-                    setQuery(e.target.value);
-                    setError('');
-                    setMessage('');
-                }}
-            />
-            {error && (
-                <div className="help" style={{ color: '#f87171' }}>
-                    {error}
-                </div>
-            )}
-            {message && (
-                <div className="help" style={{ color: '#22c55e' }}>
-                    {message}
-                </div>
-            )}
-            <button
-                className="button"
-                type="submit"
-                style={{ marginTop: '0.5rem' }}
+            <svg
+                className="searchbar__icon"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
             >
-                Sök
+                <path
+                    fill="currentColor"
+                    d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.71.71l.27.28v.79L20 20.5 20.5 20l-5-6zM10 15.5a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11z"
+                />
+            </svg>
+
+            <input
+                type="search"
+                className="searchbar__field"
+                placeholder="Sök bland dina favoritrecept"
+                value={query}
+                onChange={handleChange}
+                aria-invalid={hasError ? 'true' : 'false'}
+            />
+
+            <button
+                type="button"
+                className="searchbar__clear"
+                aria-label="Rensa sökfält"
+                onClick={clearAll}
+            >
+                &#215;
             </button>
+
+            {hasError && (
+                <p
+                    id="searchbar-error"
+                    className="searchbar__error"
+                    role="alert"
+                >
+                    {error}
+                </p>
+            )}
         </form>
     );
 }
