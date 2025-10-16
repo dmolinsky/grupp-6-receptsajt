@@ -36,16 +36,16 @@ max-width: Maximum content width — prevents text lines from becoming too wide 
     :root {
         --spacing-md: 2rem;
         --spacing-lg: 3rem;
-        --max-width: 900px;
+        --max-width: 100%;
     }
 }
 
 /* Desktop */
-@media (min-width: 1024px) {
+@media (min-width: 1023px) {
     :root {
         --spacing-md: 2.5rem;
         --spacing-lg: 4rem;
-        --max-width: 1200px;
+        --max-width: 1000px;
     }
 }
 
@@ -67,10 +67,11 @@ h4,
 h5 {
     font-family: var(--font-heading);
     color: var(--color-green);
-    margin-bottom: var(--spacing-sm);
+    margin: var(--spacing-sm);
 }
 
-p {
+p,
+span {
     font-family: var(--font-body);
     margin-bottom: var(--spacing-sm);
     color: var(--color-dark);
@@ -106,7 +107,7 @@ button:hover {
 .container {
     max-width: var(--max-width);
     margin: 0 auto;
-    padding: 0 var(--spacing-sm);
+    padding: 0 var(--spacing-md) var(--spacing-md);
 }
 
 /* -----UTILITY----- */
@@ -225,4 +226,54 @@ button:hover {
         height: 24px;
         left: 18px;
     }
+}
+
+/* -----RECIPE GRID----- */
+.recipe-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+}
+
+@media (min-width: 768px) {
+    .recipe-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .recipe-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* -----RECIPE CARD----- */
+.recipe-card {
+    background-color: white;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.recipe-card-img {
+    max-width: 100%;
+    border-radius: 8px 8px 0 0;
+}
+
+.recipe-card-rating p {
+    color: var(--color-red);
+    font-size: 1.5rem;
+}
+
+.recipe-card-description {
+    margin: var(--spacing-sm);
+}
+
+.recipe-card-details {
+    padding-bottom: var(--spacing-sm);
+}
+
+.recipe-card-details span {
+    margin: var(--spacing-sm);
+    font-weight: bold;
 }
