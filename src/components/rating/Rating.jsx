@@ -5,7 +5,12 @@ const Rating = () => {
 
     const handleClick = (value) => {
         setRating(value);
-        console.log(`User rated: ${value}`);
+        console.log(value);
+    };
+
+    const submitRating = () => {
+        // placeholder for api call
+        console.log(`Submitting rating: ${rating}`);
     };
 
     return (
@@ -18,6 +23,7 @@ const Rating = () => {
                     </button>
                 ))}
             </div>
+            <button onClick={submitRating}>Skicka</button>
         </div>
     );
 };
