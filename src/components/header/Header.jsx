@@ -7,13 +7,13 @@ function Header() {
             <h1>Julreceptsajten</h1>
             <nav className="nav">
                 <Link to="/" className="button">
-                    Hem
+                    <span>Hem </span>
                 </Link>
-                <Link to="/category/:categoryId" className="button">
-                    Kategorier
+                <Link to="/category/Frukost" className="button">
+                    <span>| Kategori frukost </span>
                 </Link>
                 <Link to="/recipe/:recipeId" className="button">
-                    Recept
+                    <span>| Recept </span>
                 </Link>
             </nav>
         </header>
