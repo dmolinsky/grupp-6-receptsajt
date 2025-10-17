@@ -1,8 +1,8 @@
 const url = 'https://grupp6-rbwot.reky.se/recipes/';
 
 // test recipe ID
-const testRecipeId = '68e636158a8cd70776c1e6dc';
-const testRating = 4;
+// const testRecipeId = '68e636158a8cd70776c1e6dc';
+// const testRating = 4;
 
 export async function postRating(rating, recipeId) {
     try {
@@ -25,10 +25,3 @@ export async function postRating(rating, recipeId) {
         throw error;
     }
 }
-
-console.log('Posting rating:', {
-    rating: testRating,
-    recipeId: testRecipeId,
-});
-
-postRating(testRating, testRecipeId);

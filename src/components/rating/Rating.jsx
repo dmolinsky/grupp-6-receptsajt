@@ -1,16 +1,13 @@
 import { useState } from 'react';
 
+import postRating from '../../utils/postRating';
+
 const Rating = () => {
     const [rating, setRating] = useState(0);
 
     const handleClick = (value) => {
         setRating(value);
         console.log(value);
-    };
-
-    const submitRating = () => {
-        // placeholder for api call
-        console.log(`Submitting rating: ${rating}`);
     };
 
     return (
@@ -23,7 +20,7 @@ const Rating = () => {
                     </button>
                 ))}
             </div>
-            <button onClick={submitRating}>Skicka</button>
+            <button onClick={() => postRating(rating, recipeId)}>Skicka</button>
         </div>
     );
 };
