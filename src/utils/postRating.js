@@ -19,9 +19,10 @@ export async function postRating(rating, recipeId) {
             const errorData = await response.text();
             throw new Error(`HTTP ${response.status}: ${errorData}`);
         }
-
     } catch (error) {
         console.error('Error posting rating:', error);
         throw error;
     }
 }
+
+export default postRating;
