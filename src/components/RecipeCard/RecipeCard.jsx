@@ -1,15 +1,21 @@
 import { Link } from 'react-router-dom';
+import DifficultyBadge from '../DifficultyBadge/DifficultyBadge';
 
 function RecipeCard({ recipe }) {
     return (
         <div className="recipe-card round-md">
-            <Link to={`/recipe/${recipe.id}`}>
-                <img
-                    className="recipe-card-img"
-                    src="https://assets.icanet.se/e_sharpen:80,q_auto,dpr_1.25,w_718,h_718,c_lfill/mpyhqrwdrvmxe4kdeklo.jpg"
-                    alt={recipe.title}
-                />
-            </Link>
+            <div className="recipe-card-image-wrapper">
+                <Link to={`/recipe/${recipe.id}`}>
+                    <img
+                        className="recipe-card-img"
+                        src={recipe.image}
+                        alt={recipe.title}
+                    />
+                </Link>
+
+                <DifficultyBadge level={recipe.difficulty} />
+            </div>
+
             <Link to={`/recipe/${recipe.id}`}>
                 <h3 className="recipe-card-title">{recipe.title}</h3>
             </Link>

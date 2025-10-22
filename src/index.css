@@ -258,6 +258,7 @@ button:hover {
 .recipe-card-img {
     max-width: 100%;
     border-radius: 8px 8px 0 0;
+    display: block;
 }
 
 .recipe-card-rating p {
@@ -276,6 +277,210 @@ button:hover {
 .recipe-card-details span {
     margin: var(--spacing-sm);
     font-weight: bold;
+}
+
+.recipe-card-image-wrapper {
+    position: relative;
+}
+
+/* -----RECIPE PAGE----- */
+.recipe-page {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.recipe-page-grid {
+    text-align: center;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas: 'image' 'details' 'ingredients' 'instructions';
+    gap: var(--spacing-xs);
+}
+
+@media (min-width: 768px) {
+    .recipe-page-grid {
+        text-align: left;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: 'details image' 'ingredients instructions';
+    }
+}
+
+.recipe-img {
+    max-width: 100%;
+    border-radius: 8px 8px 0 0;
+    grid-area: image;
+}
+
+@media (min-width: 768px) {
+    .recipe-img {
+        max-width: 90%;
+        margin: 5% 0 0 5%;
+        border-radius: 0;
+    }
+}
+
+.recipe-details {
+    grid-area: details;
+}
+
+.recipe-title-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+@media (min-width: 768px) {
+    .recipe-title-row {
+        justify-content: left;
+    }
+}
+
+.recipe-meta {
+    font-weight: bold;
+}
+
+.recipe-description {
+    max-width: 90%;
+    margin-left: 5%;
+}
+
+@media (min-width: 768px) {
+    .recipe-description {
+        max-width: 90%;
+        margin-left: 0;
+    }
+
+    .recipe-details {
+        padding: 5% 0 0 10%;
+    }
+
+    .recipe-details h2,
+    p {
+        margin-left: 0;
+    }
+}
+
+.recipe-ingredients {
+    grid-area: ingredients;
+}
+
+.recipe-ingredients table {
+    border-collapse: collapse;
+    width: 80%;
+    margin-left: 20%;
+}
+
+.recipe-ingredients td {
+    padding: 4px 6px;
+}
+
+.recipe-ingredients td:first-child {
+    text-align: left;
+    white-space: nowrap;
+    width: 40%;
+    padding-left: 10%;
+}
+
+.recipe-ingredients td:last-child {
+    text-align: left;
+    width: 60%;
+}
+
+@media (min-width: 768px) {
+    .recipe-ingredients {
+        padding: 5% 0 0 10%;
+    }
+
+    .recipe-ingredients h3 {
+        margin-left: 0;
+    }
+
+    .recipe-ingredients table {
+        width: 90%;
+        margin-left: 0;
+    }
+
+    .recipe-ingredients td:first-child {
+        width: 40%;
+        padding-left: 0;
+    }
+}
+
+.recipe-instructions {
+    grid-area: instructions;
+    max-width: 90%;
+    margin-left: 5%;
+}
+
+.recipe-instructions ol {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.recipe-instructions li {
+    background-color: color-mix(in srgb, var(--color-green) 20%, transparent);
+    padding: 0.8rem 1rem;
+    line-height: 1.4;
+}
+
+@media (min-width: 768px) {
+    .recipe-instructions {
+        padding: 5%;
+        margin: 0;
+    }
+}
+
+/* -----DIFFICULTY BADGE----- */
+.difficulty-badge {
+    display: inline-block;
+    padding: 0.3rem 0.6rem;
+    border-radius: 6px;
+    font-weight: 600;
+    min-width: 60px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.difficulty-easy {
+    background-color: color-mix(in srgb, var(--color-green) 80%, transparent);
+}
+
+.difficulty-medium {
+    background-color: color-mix(in srgb, var(--color-green) 20%, transparent);
+}
+
+.difficulty-hard {
+    background-color: color-mix(in srgb, var(--color-red) 80%, transparent);
+}
+
+.difficulty-easy span,
+.difficulty-hard span {
+    color: #fff;
+}
+
+.recipe-card .difficulty-badge {
+    display: inline-block;
+    padding: 0.3rem 0.6rem;
+    border-radius: 6px;
+    font-weight: 600;
+    min-width: 60px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.recipe-card .difficulty-badge-wrapper {
+    background-color: #fff;
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    z-index: 2;
+    border-radius: 6px;
 }
 
 /* -----RATING COMPONENT----- */
