@@ -3,7 +3,7 @@ import { getRecipeById } from 'src/utils/getRecipeById.js';
 
 describe('getRecipeById', () => {
     it('should fetch a recipe by id', async () => {
-        const id = '68e635488a8cd70776c1e261';
+        const id = '68f8984e8a8cd70776eaf67d';
         const data = await getRecipeById(id);
 
         console.log('Fetched recipe:', data);
