@@ -8,34 +8,39 @@ function CommentForm({ onSubmit }) {
     const MAX = 500;
     const MIN = 2;
 
+    const trimmedName = name.trim();
+    const trimmedText = text.trim();
+    const nameLen = trimmedName.length;
+    const textLen = trimmedText.length;
+
     const errors = useMemo(() => {
         const e = {};
-        const n = name.trim();
-        const t = text.trim();
-        if (touched.name && (n.length < MIN || n.length > MAX)) {
+        if (touched.name && (nameLen < MIN || nameLen > MAX)) {
             e.name =
-                n.length === 0
+                nameLen === 0
                     ? 'Namn är obligatoriskt.'
                     : `Mellan ${MIN}-${MAX} tecken.`;
         }
-        if (touched.text && (t.length < MIN || t.length > MAX)) {
+        if (touched.text && (textLen < MIN || textLen > MAX)) {
             e.text =
-                t.length === 0
+                textLen === 0
                     ? 'Kommentar är obligatoriskt.'
                     : `Mellan ${MIN}-${MAX} tecken.`;
         }
         return e;
-    }, [name, text, touched]);
+    }, [nameLen, textLen, touched.name, touched.text]);
 
     const isValid =
-        name.trim().length >= MIN &&
-        name.trim().length <= MAX &&
-        text.trim().length >= MAX &&
-        text.trim().length <= MAX;
+        nameLen >= MIN &&
+        nameLen <= MAX &&
+        textLen >= MIN &&
+        textLen <= MAX;
 
     function handleSubmit(e) {
         e.preventDefault();
         setTouched({ name: true, text: true });
+        if (!isValid) return;
+        onSubmit({ name: trimmedName, text: trimmedText });
         setName('');
         setText('');
         setTouched({ name: false, text: false });
@@ -55,12 +60,14 @@ function CommentForm({ onSubmit }) {
                 onBlur={() => setTouched((t) => ({ ...t, text: true }))}
                 maxLength={MAX}
                 rows={4}
+                aria-invalid={!!errors.text}
+                aria-describedby="comment-text-hint"
             />
             <div className="comment-form__meta">
-                <small className="hint">
+                <small id="comment-text-hint" className="hint">
                     {MIN}-{MAX} tecken.{' '}
                     <span>
-                        {text.length}/{MAX}
+                        {textLen}/{MAX}
                     </span>
                 </small>
                 {errors.text && <small className="error">{errors.text}</small>}
@@ -83,12 +90,13 @@ function CommentForm({ onSubmit }) {
                         onChange={(e) => setName(e.target.value)}
                         onBlur={() => setTouched((t) => ({ ...t, name: true }))}
                         maxLength={MAX}
+                        aria-invalid={!!errors.name}
                     />
                     <div className="comment-form__meta">
                         <small className="hint">
                             {MIN}-{MAX} tecken.{' '}
                             <span>
-                                {name.length}/{MAX}
+                                {nameLen}/{MAX}
                             </span>
                         </small>
                         {errors.name && (
@@ -101,6 +109,7 @@ function CommentForm({ onSubmit }) {
                     type="submit"
                     className="button comment-form__submit"
                     disabled={!isValid}
+                    aria-disabled={!isValid}
                 >
                     Skicka!
                 </button>
