@@ -31,10 +31,7 @@ function CommentForm({ onSubmit }) {
     }, [nameLen, textLen, touched.name, touched.text]);
 
     const isValid =
-        nameLen >= MIN &&
-        nameLen <= MAX &&
-        textLen >= MIN &&
-        textLen <= MAX;
+        nameLen >= MIN && nameLen <= MAX && textLen >= MIN && textLen <= MAX;
 
     function handleSubmit(e) {
         e.preventDefault();
