@@ -39,12 +39,11 @@ export function mapApiRecipes(apiRecipes) {
  * Mapping list of recipe instructions from JSON to object
  */
 export function mapApiInstructions(apiInstructions) {
-
     if (!apiInstructions || !Array.isArray(apiInstructions)) {
         return [];
     }
 
-    const instructions = apiInstructions.slice(); 
+    const instructions = apiInstructions.slice();
 
     return instructions;
 }
@@ -54,7 +53,7 @@ export function mapApiInstructions(apiInstructions) {
  */
 export function mapApiIngredients(apiIngredients) {
     if (!Array.isArray(apiIngredients)) return [];
-        return apiIngredients.map((i) => ({
+    return apiIngredients.map((i) => ({
         name: i.name,
         amount: i.amount,
         unit: i.unit,
