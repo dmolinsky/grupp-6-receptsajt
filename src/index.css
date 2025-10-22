@@ -284,10 +284,13 @@ button:hover {
 }
 
 /* -----RECIPE PAGE----- */
-.recipe-page-grid {
+.recipe-page {
     background-color: white;
     border-radius: 8px;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.recipe-page-grid {
     text-align: center;
     display: grid;
     grid-template-columns: 1fr;
@@ -478,4 +481,51 @@ button:hover {
     right: 0.75rem;
     z-index: 2;
     border-radius: 6px;
+}
+
+/* -----RATING COMPONENT----- */
+.ratingContainer {
+    text-align: center;
+    margin: var(spacing);
+}
+
+.ratingHeading {
+    color: var(--color-green);
+}
+
+.ratingStars {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-xs);
+}
+
+.ratingButton {
+    background: var(--color-red);
+    color: var(--color-light);
+    opacity: 0.3;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.ratingButton--selected {
+    opacity: 0.7;
+}
+
+.ratingSend {
+    background: var(--color-green);
+    color: var(--color-light);
+    margin-top: var(--spacing-sm);
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.ratingSend:disabled {
+    opacity: 0.2;
+    cursor: not-allowed;
+}
+
+.ratingMessage {
+    color: var(--color-dark);
+    margin: var(--spacing-sm) 0;
 }

@@ -4,7 +4,7 @@ import { getRecipesByCategory } from 'src/utils/getRecipesByCategory.js';
 
 describe('getRecipesByCategory', () => {
     it('should fetch recipes for a given category', async () => {
-        const category = 'vegetariskt';
+        const category = 'varma rätter';
         const data = await getRecipesByCategory(category);
 
         // console.log(`Fetched recipes for category "${category}":`, data);
