@@ -1,3 +1,4 @@
+/* global describe, it, expect, afterEach */
 import { render, screen, waitFor } from '@testing-library/react';
 import { vi } from 'vitest';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
