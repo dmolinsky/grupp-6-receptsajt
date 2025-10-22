@@ -278,6 +278,11 @@ button:hover {
     font-weight: bold;
 }
 
+:root {
+    --control-height: 44px;
+    --name-width: clamp(220px, 40vw, 420px);
+}
+
 .comment-section {
     margin-top: var(--spacing-lg, 3rem);
     padding-top: var(--spacing-sm, 1rem);
@@ -296,8 +301,8 @@ button:hover {
     margin-bottom: 0.25rem;
 }
 
-.comment-form__textarea,
-.comment-form__input {
+.comment-form__input,
+.comment-form__textarea {
     width: 100%;
     border-radius: 10px;
     border: 1px solid color-mix(in oklab, var(--color-dark) 15%, transparent);
@@ -305,15 +310,38 @@ button:hover {
     padding: var(--spacing-sm, 1rem);
     font: inherit;
     outline: none;
+    box-sizing: border-box;
     transition:
         box-shadow 120ms ease,
         border-color 120ms ease;
+}
+
+.comment-form__textarea {
+    min-height: 8rem;
+    resize: vertical;
+}
+
+@media (min-width: 1024px) {
+    .comment-form__textarea {
+        min-height: 10rem;
+    }
+}
+
+.comment-form__input {
+    height: var(--control-height, 44px);
+    min-height: unset;
+    resize: none;
 }
 
 .comment-form__textarea:focus,
 .comment-form__input:focus {
     border-color: var(--color-green);
     box-shadow: var(--shadow-sm, 0 1px 2px rgba(0, 0, 0, 0.06));
+}
+.comment-form__textarea:focus-visible,
+.comment-form__input:focus-visible {
+    outline: 2px solid color-mix(in oklab, var(--color-green) 35%, transparent);
+    outline-offset: 2px;
 }
 
 .comment-form__textarea.has-error,
@@ -327,7 +355,6 @@ button:hover {
     align-items: baseline;
     margin: 0.35rem 0 var(--spacing-sm, 0.75rem);
 }
-
 .hint {
     color: color-mix(in oklab, var(--color-dark), white 35%);
 }
@@ -339,33 +366,31 @@ button:hover {
 }
 
 .comment-form__row {
-    display: grid;
-    grid-template-columns: minmax(220px, 420px) auto;
-    justify-content: start;
-    align-items: end;
-    gap: var(--spacing-sm, 0.75rem);
-    position: relative;
-    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm, 1rem);
+    flex-wrap: nowrap;
 }
 
 .comment-form__name-wrap {
-    max-width: 420px;
-    width: 100%;
-    position: relative;
-    z-index: 1;
+    flex: 0 0 var(--name-width);
+    min-width: 220px;
 }
 
 .comment-form__submit {
-    position: relative;
-    z-index: 3;
-    opacity: 1;
-    padding: 0.75rem 1rem;
-    border-radius: 16px;
+    height: var(--control-height);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 18px;
+    border-radius: 10px;
     border: none;
     background: var(--color-green);
     color: var(--color-light);
     font-weight: 700;
     cursor: pointer;
+    opacity: 1;
+    transform: translateY(-1px);
     transition:
         transform 120ms ease,
         filter 120ms ease,
@@ -377,7 +402,11 @@ button:hover {
     filter: grayscale(0.1);
 }
 .comment-form__submit:not([disabled]):hover {
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+}
+.comment-form__submit:focus-visible {
+    outline: 2px solid color-mix(in oklab, var(--color-green) 35%, transparent);
+    outline-offset: 2px;
 }
 
 .comment-form__flash {
@@ -427,10 +456,14 @@ button:hover {
 
 @media (max-width: 640px) {
     .comment-form__row {
-        grid-template-columns: 1fr;
+        flex-wrap: wrap;
+    }
+    .comment-form__name-wrap {
+        flex-basis: 100%;
     }
     .comment-form__submit {
         width: 100%;
+        transform: translateY(0);
     }
     .comment-form__textarea {
         min-height: 7rem;
