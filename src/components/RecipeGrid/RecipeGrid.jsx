@@ -1,4 +1,4 @@
-import RecipeCard from '../RecipeCard/RecipeCard';
+import RecipeCard from '../RecipeCard/recipeCard';
 import React, { useEffect, useState } from 'react';
 import { getAllRecipes } from '../../utils/getAllRecipes';
 import { getRecipesByCategory } from '../../utils/getRecipesByCategory';
