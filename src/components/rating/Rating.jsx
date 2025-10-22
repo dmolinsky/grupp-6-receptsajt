@@ -32,7 +32,8 @@ const Rating = () => {
         return (
             <div className="ratingContainer">
                 <p className="ratingMessage">
-                    Tack för din röst! Du har redan betygsatt detta recept.
+                    Tack för din röst! <br />
+                    Du har betygsatt detta recept.
                 </p>
             </div>
         );
