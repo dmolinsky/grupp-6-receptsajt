@@ -1,7 +1,12 @@
+import { useParams } from 'react-router-dom';
+import Recipe from '../../components/Recipe/Recipe';
+
 function RecipePage() {
+    const { recipeId } = useParams();
+
     return (
-        <main>
-            <p>Recipe page</p>
+        <main className="recipe-page">
+            <Recipe category={recipeId} />
         </main>
     );
 }
