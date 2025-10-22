@@ -18,7 +18,11 @@ function CommentSection({ recipeId, initialComments = [] }) {
     }
 
     return (
-        <section className="comment-section" aria-labelledby="comments-title">
+        <section
+            className="comment-section"
+            aria-labelledby="comments-title"
+            data-recipe-id={recipeId}
+        >
             <h2 id="comments-title" className="comment-section__title">
                 Kommentarer
             </h2>
