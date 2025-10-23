@@ -2,6 +2,8 @@ import { useParams } from 'react-router-dom';
 import Recipe from '../../components/Recipe/Recipe';
 import Rating from '../../components/rating/Rating';
 
+import CommentSection from 'src/components/comment/CommentSection.jsx';
+
 function RecipePage() {
     const { recipeId } = useParams();
 
@@ -9,6 +11,7 @@ function RecipePage() {
         <div className="recipe-page">
             <Recipe recipeId={recipeId} />
             <Rating />
+            <CommentSection recipeId={recipeId} initialComments={[]} />
         </div>
     );
 }
