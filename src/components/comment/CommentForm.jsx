@@ -10,6 +10,12 @@ function CommentForm({ onSubmit }) {
     const MAX_NAME = 100;
     const MIN_NAME = 2;
 
+    const INVALID_TAGS = /[<>]/;
+    const INVALID_NAME = /[^a-zA-ZåäöÅÄÖ\s'-]/;
+    const INVALID_TEXT = /[^a-zA-ZåäöÅÄÖ0-9\s.,!?'"()\n-]/;
+    const INVALID_NEWLINES = /\n{5,}/;
+    const INVALID_LINKS = /https?:\/\//i;
+
     const trimmedName = name.trim();
     const trimmedText = text.trim();
     const nameLen = trimmedName.length;
@@ -29,6 +35,34 @@ function CommentForm({ onSubmit }) {
                     ? 'Din kommentar är helt tom!'
                     : `Mellan ${MIN_COMMENT}-${MAX_COMMENT} tecken.`;
         }
+
+        if (touched.text && INVALID_TAGS.test(trimmedText)) {
+            e.text =
+                'Kommentaren får inte innehålla HTML-taggar eller andra otillåtna tecken.';
+        }
+
+        if (touched.name && INVALID_TAGS.test(trimmedName)) {
+            e.name =
+                'Namnet får inte innehålla HTML-taggar eller andra otillåtna tecken.';
+        }
+
+        if (touched.name && INVALID_NAME.test(trimmedName)) {
+            e.name =
+                'Namnet får bara innehålla bokstäver, mellanslag och bindestreck.';
+        }
+
+        if (touched.text && INVALID_TEXT.test(trimmedText)) {
+            e.text = 'Kommentaren innehåller otillåtna tecken.';
+        }
+
+        if (touched.text && INVALID_NEWLINES.test(trimmedText)) {
+            e.text = 'Kommentaren får inte innehålla för många radbrytningar.';
+        }
+
+        if (touched.text && INVALID_LINKS.test(trimmedText)) {
+            e.text = 'Kommentaren får inte innehålla länkar.';
+        }
+
         return e;
     }, [nameLen, textLen, touched.name, touched.text]);
 
@@ -36,7 +70,12 @@ function CommentForm({ onSubmit }) {
         nameLen >= MIN_NAME &&
         nameLen <= MAX_NAME &&
         textLen >= MIN_COMMENT &&
-        textLen <= MAX_COMMENT;
+        textLen <= MAX_COMMENT &&
+        !INVALID_TAGS.test(trimmedText) &&
+        !INVALID_TAGS.test(trimmedName) &&
+        !INVALID_TEXT.test(trimmedText) &&
+        !INVALID_NEWLINES.test(trimmedText) &&
+        !INVALID_LINKS.test(trimmedText);
 
     function handleSubmit(e) {
         e.preventDefault();
