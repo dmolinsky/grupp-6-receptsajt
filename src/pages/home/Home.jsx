@@ -1,11 +1,12 @@
 import SearchBar from '../../components/searchbar/SearchBar.jsx';
 import RecipeGrid from '../../components/RecipeGrid/RecipeGrid';
+import CategoryList from '../../components/categoryList/CategoryList';
 
 function Home() {
     return (
         <main className="home">
             <SearchBar />
-            <p>Home Page</p>
+            <CategoryList />
             <RecipeGrid />
         </main>
     );
