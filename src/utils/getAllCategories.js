@@ -14,4 +14,4 @@ export async function getAllCategories() {
         console.error('Error fetching categories:', error);
         throw error;
     }
-};
+}

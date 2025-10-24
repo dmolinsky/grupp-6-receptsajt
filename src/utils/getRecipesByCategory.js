@@ -15,4 +15,4 @@ export async function getRecipesByCategory(category) {
         console.error('Error fetching recipes:', error);
         throw error;
     }
-};
+}
