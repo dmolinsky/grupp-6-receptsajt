@@ -5,8 +5,10 @@ function CommentForm({ onSubmit }) {
     const [text, setText] = useState('');
     const [touched, setTouched] = useState({ name: false, text: false });
 
-    const MAX = 500;
-    const MIN = 2;
+    const MAX_COMMENT = 500;
+    const MIN_COMMENT = 2;
+    const MAX_NAME = 100;
+    const MIN_NAME = 2;
 
     const trimmedName = name.trim();
     const trimmedText = text.trim();
@@ -15,23 +17,26 @@ function CommentForm({ onSubmit }) {
 
     const errors = useMemo(() => {
         const e = {};
-        if (touched.name && (nameLen < MIN || nameLen > MAX)) {
+        if (touched.name && (nameLen < MIN_NAME || nameLen > MAX_NAME)) {
             e.name =
                 nameLen === 0
-                    ? 'Namn är obligatoriskt.'
-                    : `Mellan ${MIN}-${MAX} tecken.`;
+                    ? 'Vänligen fyll i ditt namn!'
+                    : `Ditt namn måste vara mellan ${MIN_NAME}-${MAX_NAME} tecken långt!`;
         }
-        if (touched.text && (textLen < MIN || textLen > MAX)) {
+        if (touched.text && (textLen < MIN_COMMENT || textLen > MAX_COMMENT)) {
             e.text =
                 textLen === 0
-                    ? 'Kommentar är obligatoriskt.'
-                    : `Mellan ${MIN}-${MAX} tecken.`;
+                    ? 'Din kommentar är helt tom!'
+                    : `Mellan ${MIN_COMMENT}-${MAX_COMMENT} tecken.`;
         }
         return e;
     }, [nameLen, textLen, touched.name, touched.text]);
 
     const isValid =
-        nameLen >= MIN && nameLen <= MAX && textLen >= MIN && textLen <= MAX;
+        nameLen >= MIN_NAME &&
+        nameLen <= MAX_NAME &&
+        textLen >= MIN_COMMENT &&
+        textLen <= MAX_COMMENT;
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -46,60 +51,58 @@ function CommentForm({ onSubmit }) {
     return (
         <form className="comment-form" onSubmit={handleSubmit} noValidate>
             <label htmlFor="comment-text" className="comment-form__label">
-                Skriv din kommentar
+                Skriv din kommentar:
             </label>
-            <textarea
-                id="comment-text"
-                className={`comment-form__textarea ${errors.text ? 'has-error' : ''}`}
-                placeholder="Skriv din kommentar..."
-                value={text}
-                onChange={(e) => setText(e.target.value)}
-                onBlur={() => setTouched((t) => ({ ...t, text: true }))}
-                maxLength={MAX}
-                rows={4}
-                aria-invalid={!!errors.text}
-                aria-describedby="comment-text-hint"
-            />
-            <div className="comment-form__meta">
+            <div className="comment-textarea-wrapper">
+                <textarea
+                    id="comment-text"
+                    className={`comment-form__textarea ${errors.text ? 'has-error' : ''}`}
+                    placeholder="Skriv din kommentar här..."
+                    value={text}
+                    onChange={(e) => setText(e.target.value)}
+                    onBlur={() => setTouched((t) => ({ ...t, text: true }))}
+                    maxLength={MAX_COMMENT}
+                    rows={4}
+                    aria-invalid={!!errors.text}
+                    aria-describedby="comment-text-hint"
+                />
                 <small id="comment-text-hint" className="hint">
-                    {MIN}-{MAX} tecken.{' '}
                     <span>
-                        {textLen}/{MAX}
+                        {textLen}/{MAX_COMMENT}
                     </span>
                 </small>
+            </div>
+            <div className="comment-form__meta">
                 {errors.text && <small className="error">{errors.text}</small>}
             </div>
 
+            <label htmlFor="comment-name" className="comment-form__label">
+                Fyll i ditt namn:
+            </label>
             <div className="comment-form__row">
-                <div className="comment-form__name-wrap">
-                    <label
-                        htmlFor="comment-name"
-                        className="comment-form__label"
-                    >
-                        Ditt namn
-                    </label>
+                <div className="comment-input-wrapper">
                     <input
                         id="comment-name"
                         className={`comment-form__input ${errors.name ? 'has-error' : ''}`}
                         type="text"
-                        placeholder="Fyll i ditt namn"
+                        placeholder="Fyll i ditt namn här..."
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         onBlur={() => setTouched((t) => ({ ...t, name: true }))}
-                        maxLength={MAX}
+                        maxLength={MAX_NAME}
                         aria-invalid={!!errors.name}
                     />
-                    <div className="comment-form__meta">
-                        <small className="hint">
-                            {MIN}-{MAX} tecken.{' '}
-                            <span>
-                                {nameLen}/{MAX}
-                            </span>
-                        </small>
-                        {errors.name && (
-                            <small className="error">{errors.name}</small>
-                        )}
-                    </div>
+                    <small id="input-hint" className="hint">
+                        <span>
+                            {nameLen}/{MAX_NAME}
+                        </span>
+                    </small>
+                </div>
+
+                <div className="comment-form__meta">
+                    {errors.name && (
+                        <small className="error">{errors.name}</small>
+                    )}
                 </div>
 
                 <button
@@ -108,7 +111,7 @@ function CommentForm({ onSubmit }) {
                     disabled={!isValid}
                     aria-disabled={!isValid}
                 >
-                    Skicka!
+                    Skicka
                 </button>
             </div>
         </form>

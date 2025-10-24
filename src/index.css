@@ -71,7 +71,8 @@ h5 {
 }
 
 p,
-span {
+span,
+small {
     font-family: var(--font-body);
     margin-bottom: var(--spacing-sm);
     color: var(--color-dark);
@@ -530,6 +531,16 @@ button:hover {
     margin: var(--spacing-sm) 0;
 }
 
+/* -----COMMENT COMPONENTS----- */
+
+label,
+textarea,
+input {
+    font-family: 'Open Sans', sans-serif;
+    font-family: var(--font-body);
+    color: var(--color-dark);
+}
+
 :root {
     --control-height: 44px;
     --name-width: clamp(220px, 40vw, 420px);
@@ -540,17 +551,20 @@ button:hover {
     padding-top: var(--spacing-sm, 1rem);
     border-top: 1px solid
         color-mix(in oklab, var(--color-dark) 15%, transparent);
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
 }
 
 .comment-section__title {
-    font-family: var(--font-heading, serif);
     margin-bottom: var(--spacing-sm, 1rem);
+    margin-left: 0;
 }
 
 .comment-form__label {
     display: block;
     font-weight: 600;
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.5rem;
 }
 
 .comment-form__input,
@@ -559,8 +573,6 @@ button:hover {
     border-radius: 10px;
     border: 1px solid color-mix(in oklab, var(--color-dark) 15%, transparent);
     background: var(--color-bg);
-    padding: var(--spacing-sm, 1rem);
-    font: inherit;
     outline: none;
     box-sizing: border-box;
     transition:
@@ -568,9 +580,17 @@ button:hover {
         border-color 120ms ease;
 }
 
+.comment-form__input,
+.comment-form__textarea {
+    padding: var(--spacing-sm) 3.2rem var(--spacing-sm) var(--spacing-sm);
+}
+
 .comment-form__textarea {
     min-height: 8rem;
-    resize: vertical;
+}
+
+.comment-form__input {
+    grid-area: input;
 }
 
 @media (min-width: 1024px) {
@@ -579,10 +599,29 @@ button:hover {
     }
 }
 
+.comment-textarea-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.comment-input-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 95%;
+}
+
 .comment-form__input {
     height: var(--control-height, 44px);
     min-height: unset;
     resize: none;
+    width: 100%;
+}
+
+@media (max-width: 764px) {
+    .comment-input-wrapper {
+        width: 100%;
+    }
 }
 
 .comment-form__textarea:focus,
@@ -606,27 +645,45 @@ button:hover {
     gap: var(--spacing-sm, 0.75rem);
     align-items: baseline;
     margin: 0.35rem 0 var(--spacing-sm, 0.75rem);
+    grid-area: error;
 }
+
+#comment-text-hint,
+#input-hint {
+    position: absolute;
+    bottom: -2px;
+    right: 10px;
+}
+
 .hint {
     color: color-mix(in oklab, var(--color-dark), white 35%);
 }
+
 .hint span {
     opacity: 0.7;
 }
+
 .error {
     color: var(--color-red);
 }
 
 .comment-form__row {
-    display: flex;
+    display: grid;
     align-items: center;
-    gap: var(--spacing-sm, 1rem);
-    flex-wrap: nowrap;
+    grid-template-columns: 70% 30%;
+    grid-template-areas:
+        'input button'
+        'error button';
 }
 
-.comment-form__name-wrap {
-    flex: 0 0 var(--name-width);
-    min-width: 220px;
+@media (max-width: 764px) {
+    .comment-form__row {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            'input'
+            'error'
+            'button';
+    }
 }
 
 .comment-form__submit {
@@ -638,21 +695,21 @@ button:hover {
     border-radius: 10px;
     border: none;
     background: var(--color-green);
+    opacity: 0.8;
     color: var(--color-light);
-    font-weight: 700;
     cursor: pointer;
-    opacity: 1;
     transform: translateY(-1px);
     transition:
         transform 120ms ease,
         filter 120ms ease,
         opacity 120ms ease;
 }
+
 .comment-form__submit[disabled] {
-    opacity: 0.6;
+    opacity: 0.2;
     cursor: not-allowed;
-    filter: grayscale(0.1);
 }
+
 .comment-form__submit:not([disabled]):hover {
     transform: translateY(-2px);
 }
@@ -706,17 +763,20 @@ button:hover {
     opacity: 0.8;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
     .comment-form__row {
         flex-wrap: wrap;
     }
+
     .comment-form__name-wrap {
         flex-basis: 100%;
     }
+
     .comment-form__submit {
         width: 100%;
         transform: translateY(0);
     }
+
     .comment-form__textarea {
         min-height: 7rem;
     }
