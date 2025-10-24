@@ -1,6 +1,6 @@
 const url = 'https://grupp6-rbwot.reky.se/categories/';
 
-export const getRecipesByCategory = async (category) => {
+export async function getRecipesByCategory(category) {
     try {
         const response = await fetch(url + category + '/recipes');
 
