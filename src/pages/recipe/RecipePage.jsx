@@ -11,7 +11,7 @@ function RecipePage() {
         <div className="recipe-page">
             <Recipe recipeId={recipeId} />
             <Rating />
-            <CommentSection recipeId={recipeId} initialComments={[]} />
+            <CommentSection recipeId={recipeId} />
         </div>
     );
 }

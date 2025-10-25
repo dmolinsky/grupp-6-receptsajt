@@ -1,10 +1,29 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import CommentForm from './CommentForm';
 import CommentList from './CommentList';
 
-function CommentSection({ recipeId, initialComments = [] }) {
-    const [comments, setComments] = useState(initialComments);
+function CommentSection({ recipeId }) {
+    const [comments, setComments] = useState([]);
     const [flash, setFlash] = useState('');
+
+    useEffect(() => {
+        const exampleComments = [
+            {
+                name: 'Anna',
+                text: 'Supergott recept! Jag la till lite extra kanel.',
+                createdAt: '2025-10-24T12:00:00Z',
+            },
+            {
+                name: 'Johan',
+                text: 'Smidigt att följa, tack!',
+                createdAt: '2025-10-23T18:30:00Z',
+            },
+        ];
+
+        setComments(exampleComments);
+
+        console.log(comments);
+    }, []);
 
     function handleAddComment(commentData) {
         const newComment = {
@@ -13,8 +32,7 @@ function CommentSection({ recipeId, initialComments = [] }) {
             createdAt: new Date().toISOString(),
         };
         setComments((prev) => [newComment, ...prev]);
-        setFlash('Din kommentar har skickats!');
-        setTimeout(() => setFlash(''), 4000);
+        setFlash('Tack för din kommentar!');
     }
 
     return (
