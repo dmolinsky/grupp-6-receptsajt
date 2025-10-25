@@ -21,8 +21,6 @@ function CommentSection({ recipeId }) {
         ];
 
         setComments(exampleComments);
-
-        console.log(comments);
     }, []);
 
     function handleAddComment(commentData) {

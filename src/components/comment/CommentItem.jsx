@@ -11,7 +11,9 @@ function CommentItem({ comment }) {
     return (
         <li className="comment-item">
             <header className="comment-item__header">
-                <strong className="comment-item__author">{name}</strong>
+                <strong className="comment-item__author">
+                    <p>{name}</p>
+                </strong>
                 <time className="comment-item__date" dateTime={createdAt}>
                     {formattedDate}
                 </time>

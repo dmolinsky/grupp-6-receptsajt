@@ -72,7 +72,8 @@ h5 {
 
 p,
 span,
-small {
+small,
+time {
     font-family: var(--font-body);
     margin-bottom: var(--spacing-sm);
     color: var(--color-dark);
@@ -732,10 +733,9 @@ input {
 }
 
 .comment-item {
-    background: var(--color-light);
-    border-radius: 16px;
-    padding: var(--spacing-sm, 1rem);
-    box-shadow: var(--shadow-sm, 0 1px 2px rgba(0, 0, 0, 0.06));
+    padding: var(--spacing-sm) 0 var(--spacing-sm) 0;
+    border-bottom: 1px solid
+        color-mix(in oklab, var(--color-dark) 15%, transparent);
 }
 
 .comment-item__header {
