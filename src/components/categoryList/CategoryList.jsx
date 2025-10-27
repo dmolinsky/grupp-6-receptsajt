@@ -1,19 +1,31 @@
 import { NavLink } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { getAllCategories } from '../../utils/getAllCategories';
 
 function CategoryList() {
+    const [categories, setCategories] = useState([]);
     const [showMenu, setShowMenu] = useState(false);
+    const [error, setError] = useState(null);
 
-    const categories = [
-        { name: 'kalla rätter', count: 3 },
-        { name: 'söta rätter', count: 3 },
-        { name: 'varma rätter', count: 3 },
-    ];
+    useEffect(() => {
+        async function fetchCategories() {
+            try {
+                const data = await getAllCategories();
+                setCategories(data);
+            } catch (err) {
+                console.error('Kunde inte hämta kategorier:', err);
+                setError('Kunde inte hämta kategorier 😞');
+            }
+        }
+
+        fetchCategories();
+    }, []);
 
     return (
         <>
             <div className="category-list">
                 <h3>Kategorier:</h3>
+                {error && <p>{error}</p>}
                 {categories.map((category, index) => (
                     <div className="category-link">
                         <NavLink to={`/category/${category.name}`}>
@@ -34,6 +46,7 @@ function CategoryList() {
                     aria-expanded={showMenu}
                 >
                     <span className="category-toggle-text">Kategorier</span>
+                    {error && <p>{error}</p>}
                     <span className={`arrow ${open ? 'up' : 'down'}`}>▾</span>
                 </button>
 
