@@ -5,8 +5,8 @@ import CategoryList from '../../components/categoryList/CategoryList';
 function Home() {
     return (
         <main className="home">
-            <SearchBar />
             <CategoryList />
+            <SearchBar />
             <RecipeGrid />
         </main>
     );
