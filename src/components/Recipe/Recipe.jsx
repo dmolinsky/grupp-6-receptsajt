@@ -1,12 +1,12 @@
-import DifficultyBadge from '../DifficultyBadge/DifficultyBadge';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { getRecipeById } from '../../utils/getRecipeById';
 import {
-    mapApiRecipe,
     mapApiIngredients,
     mapApiInstructions,
+    mapApiRecipe,
 } from '../../utils/recipeMappers';
-import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import DifficultyBadge from '../DifficultyBadge/DifficultyBadge';
 
 function Recipe() {
     const { recipeId } = useParams();
@@ -67,7 +67,7 @@ function Recipe() {
                     <p>★★★★☆{rating}</p>
                 </div>
                 <p className="recipe-meta">
-                    {ingredientsCount} ingredienser · {cookingTime} minuter
+                    {ingredientsCount} ingredienser · {cookingTime}
                 </p>
                 <p className="recipe-description">{description}</p>
             </div>
