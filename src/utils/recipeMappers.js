@@ -1,3 +1,5 @@
+import { mapMinutesToTimeString } from './timeMapper';
+
 /**
  * Mapping one single recipe from JSON to object
  */
@@ -20,8 +22,8 @@ export function mapApiRecipe(apiRecipe) {
         description: apiRecipe.description || '',
         image: apiRecipe.imageUrl || '',
         category: apiRecipe.category || 'Okänd kategori',
-        cookingTime: apiRecipe.cooking_time || 0,
-        ingredientsCount: apiRecipe.ingredients_count || 0,
+        cookingTime: mapMinutesToTimeString(apiRecipe.timeInMins || 0),
+        ingredientsCount: apiRecipe.ingredients.length || 0,
         rating: averageRating,
         difficulty: difficulty,
     };
