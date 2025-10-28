@@ -21,6 +21,8 @@ function CategoryList() {
         fetchCategories();
     }, []);
 
+    if (error) return null;
+
     return (
         <>
             <div className="category-list">
