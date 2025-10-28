@@ -1,5 +1,5 @@
-import '../../index.css';
 import { Link } from 'react-router-dom';
+import '../../index.css';
 
 function Header() {
     return (
@@ -9,7 +9,7 @@ function Header() {
                     Julreceptsajten
                 </Link>
             </h1>
-        </header> 
+        </header>
     );
 }
 
