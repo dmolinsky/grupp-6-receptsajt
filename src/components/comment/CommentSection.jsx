@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import CommentForm from './CommentForm';
 import CommentList from './CommentList';
+import postCommentById from '../../utils/postCommentById';
 
 function CommentSection({ recipeId }) {
     const [comments, setComments] = useState([]);
     const [flash, setFlash] = useState('');
+    const [error, setError] = useState('');
 
     useEffect(() => {
         const exampleComments = [
@@ -23,14 +25,31 @@ function CommentSection({ recipeId }) {
         setComments(exampleComments);
     }, []);
 
-    function handleAddComment(commentData) {
-        const newComment = {
-            id: crypto.randomUUID(),
-            ...commentData,
-            createdAt: new Date().toISOString(),
-        };
-        setComments((prev) => [newComment, ...prev]);
-        setFlash('Tack för din kommentar!');
+    async function handleAddComment(commentData) {
+        setError('');
+        setFlash('');
+
+        try {
+            await postCommentById(
+                {
+                    comment: commentData.text,
+                    name: commentData.name,
+                },
+                recipeId
+            );
+
+            const newComment = {
+                id: crypto.randomUUID(),
+                ...commentData,
+                createdAt: new Date().toISOString(),
+            };
+
+            setComments((prev) => [newComment, ...prev]);
+            setFlash('Tack för din kommentar!');
+        } catch (err) {
+            console.error('Kunde inte spara kommentaren:', err);
+            setError('Kunde inte spara kommentaren. :( Försök igen.');
+        }
     }
 
     return (
@@ -47,6 +66,11 @@ function CommentSection({ recipeId }) {
             {flash && (
                 <p className="comment-form__flash" role="status">
                     {flash}
+                </p>
+            )}
+            {error && (
+                <p className="comment-form__error" role="alert">
+                    {error}
                 </p>
             )}
 
