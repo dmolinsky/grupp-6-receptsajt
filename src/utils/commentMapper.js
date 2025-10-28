@@ -8,7 +8,15 @@ export function mapApiComment(apiComment) {
     }
 
     if (Array.isArray(apiComment)) {
-        return apiComment.map(mapApiComment);
+        // Sort by createdAt (or date) descending before mapping
+        return apiComment
+            .slice() // avoid mutating original
+            .sort(
+                (a, b) =>
+                    new Date(b.createdAt || b.date) -
+                    new Date(a.createdAt || a.date)
+            )
+            .map(mapApiComment);
     }
 
     return {
