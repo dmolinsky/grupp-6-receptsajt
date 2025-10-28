@@ -27,7 +27,7 @@ function CategoryList() {
                 <h3>Kategorier:</h3>
                 {error && <p>{error}</p>}
                 {categories.map((category, index) => (
-                    <div className="category-link">
+                    <div className="category-link" key={category.name || index}>
                         <NavLink to={`/category/${category.name}`}>
                             <span key={index}>
                                 {category.name.charAt(0).toUpperCase() +
@@ -38,7 +38,6 @@ function CategoryList() {
                     </div>
                 ))}
             </div>
-
             <div className="category-list-small-screens">
                 <button
                     className="category-toggle"
