@@ -29,7 +29,7 @@ function RecipeCard({ recipe }) {
             </p>
             <div className="recipe-card-details">
                 <span>{recipe.ingredientsCount} ingredienser</span>
-                <span>{recipe.cookingTime} minuter</span>
+                <span>{recipe.cookingTime}</span>
             </div>
         </div>
     );
