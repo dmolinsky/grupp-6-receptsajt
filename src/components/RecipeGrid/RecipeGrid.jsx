@@ -1,8 +1,8 @@
-import RecipeCard from '../RecipeCard/RecipeCard';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getAllRecipes } from '../../utils/getAllRecipes';
 import { getRecipesByCategory } from '../../utils/getRecipesByCategory';
 import { mapApiRecipes } from '../../utils/recipeMappers';
+import RecipeCard from '../RecipeCard/RecipeCard';
 
 function RecipeGrid({ category = null, searchQuery = null }) {
     const [recipes, setRecipes] = useState([]);

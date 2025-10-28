@@ -1,12 +1,13 @@
 import RecipeGrid from '../../components/RecipeGrid/RecipeGrid';
 import { useParams } from 'react-router-dom';
+import CategoryList from '../../components/categoryList/CategoryList';
 
 function CategoryPage() {
     const { categoryId } = useParams();
 
     return (
         <main>
-            <p>{categoryId}</p>
+            <CategoryList />
             <RecipeGrid category={categoryId} />
         </main>
     );
