@@ -1,8 +1,10 @@
-const url = "https://grupp6-rbwot.reky.se/recipes/1/comments";
+const url = 'https://grupp6-rbwot.reky.se/recipes/1/comments';
 
 export async function getCommentsById(id) {
     try {
-        const response = await fetch(`https://grupp6-rbwot.reky.se/recipes/${id}/comments`);
+        const response = await fetch(
+            `https://grupp6-rbwot.reky.se/recipes/${id}/comments`
+        );
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
@@ -13,6 +15,5 @@ export async function getCommentsById(id) {
         throw error;
     }
 }
-
 
 export default getCommentsById;

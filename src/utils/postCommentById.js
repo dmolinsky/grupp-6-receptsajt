@@ -1,4 +1,4 @@
-const url = "https://grupp6-rbwot.reky.se/recipes";
+const url = 'https://grupp6-rbwot.reky.se/recipes';
 
 // såhär ser scemat ut i API, får testa olika för att få in tid
 // const exampleSchema = {
