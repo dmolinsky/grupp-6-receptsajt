@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import CommentForm from './CommentForm';
 import CommentList from './CommentList';
 import postCommentById from '../../utils/postCommentById';
+import getCommentsById from '../../utils/getCommentsById';
+import mapApiComment from '../../utils/commentMapper';
 
 function CommentSection({ recipeId }) {
     const [comments, setComments] = useState([]);
@@ -9,21 +12,20 @@ function CommentSection({ recipeId }) {
     const [error, setError] = useState('');
 
     useEffect(() => {
-        const exampleComments = [
-            {
-                name: 'Anna',
-                text: 'Supergott recept! Jag la till lite extra kanel.',
-                createdAt: '2025-10-24T12:00:00Z',
-            },
-            {
-                name: 'Johan',
-                text: 'Smidigt att följa, tack!',
-                createdAt: '2025-10-23T18:30:00Z',
-            },
-        ];
+        async function fetchComments() {
+            try {
+                const data = await getCommentsById(recipeId);
+                const mapped = mapApiComment(data);
 
-        setComments(exampleComments);
-    }, []);
+                setComments(mapped);
+            } catch (err) {
+                console.error('Kunde inte hämta kommentarer:', err);
+                setError('Kunde inte hämta kommentarer. 😞');
+            }
+        }
+
+        fetchComments();
+    }, [recipeId]);
 
     async function handleAddComment(commentData) {
         setError('');
@@ -40,8 +42,9 @@ function CommentSection({ recipeId }) {
 
             const newComment = {
                 id: crypto.randomUUID(),
-                ...commentData,
-                createdAt: new Date().toISOString(),
+                comment: commentData.text,
+                name: commentData.name,
+                date: new Date().toISOString(),
             };
 
             setComments((prev) => [newComment, ...prev]);
@@ -78,5 +81,10 @@ function CommentSection({ recipeId }) {
         </section>
     );
 }
+
+CommentSection.propTypes = {
+    recipeId: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+        .isRequired,
+};
 
 export default CommentSection;

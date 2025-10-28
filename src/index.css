@@ -555,6 +555,7 @@ input {
     width: 90%;
     margin-left: 5%;
     margin-right: 5%;
+    padding-bottom: var(--spacing-md);
 }
 
 .comment-section__title {

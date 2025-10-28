@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import PropTypes from 'prop-types';
 
 const INVALID_TAGS = /[<>]/;
 const INVALID_NAME = /[^a-zA-ZåäöÅÄÖ\s'-]/;
@@ -163,4 +164,9 @@ function CommentForm({ onSubmit }) {
         </form>
     );
 }
+
+CommentForm.propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+};
+
 export default CommentForm;
