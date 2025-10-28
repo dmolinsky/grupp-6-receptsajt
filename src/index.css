@@ -228,6 +228,118 @@ button:hover {
     }
 }
 
+/* -----CATEGORY LIST----- */
+.category-list {
+    background-color: var(--color-red);
+    opacity: 0.9;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+    display: none;
+    flex-direction: row;
+    gap: var(--spacing-md);
+    align-items: center;
+    margin-top: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+}
+
+@media (min-width: 1023px) {
+    .category-list {
+        display: flex;
+    }
+}
+
+.category-list h3 {
+    width: 29%;
+    color: var(--color-light);
+}
+
+.category-link {
+    display: inline-block;
+    margin-left: 5%;
+}
+
+.category-link span {
+    color: var(--color-light);
+}
+
+.category-link a.active {
+    font-weight: 700;
+}
+
+/* -----CATEGORY LIST SMALL SCREENS----- */
+
+.category-toggle {
+    position: relative;
+    padding: 0 3.5rem 0 3rem;
+    width: 100%;
+    border-radius: var(--radius-pill);
+    background-color: #6c3131;
+    color: var(--color-light);
+    opacity: 1;
+    height: 3.5rem;
+    display: flex;
+    margin-top: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+}
+
+.category-toggle:hover {
+    opacity: 1;
+}
+
+.category-toggle span {
+    color: var(--color-light);
+    font-size: 1rem;
+    font-weight: 550;
+}
+
+.category-toggle-text {
+    position: absolute;
+    left: 10%;
+    top: 32%;
+}
+
+.category-toggle .arrow {
+    font-size: 2rem;
+    position: absolute;
+    right: 5%;
+    top: 15%;
+}
+
+.dropdown {
+    background-color: #6c3131;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+    min-height: 100px;
+    padding-top: 40px;
+    margin-top: -45px;
+    margin-bottom: var(--spacing-md);
+    border-radius: 0 0 30px 30px;
+    display: none;
+    max-height: 130px;
+}
+
+.dropdown.show {
+    display: grid;
+}
+
+.category-list-small-screens .dropdown p {
+    color: var(--color-light);
+    float: left;
+    padding-left: 10%;
+}
+
+.category-list-small-screens a.active {
+    font-weight: 700;
+}
+
+@media (min-width: 1023px) {
+    .category-list-small-screens {
+        display: none;
+    }
+}
+
 /* -----RECIPE GRID----- */
 .recipe-grid {
     display: grid;
