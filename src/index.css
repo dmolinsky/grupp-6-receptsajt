@@ -604,7 +604,13 @@ button:hover {
 /* -----RATING COMPONENT----- */
 .ratingContainer {
     text-align: center;
-    margin: var(spacing);
+    padding-top: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+    border-top: 1px solid
+        color-mix(in oklab, var(--color-dark) 15%, transparent);
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
 }
 
 .ratingHeading {
