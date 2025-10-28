@@ -1,5 +1,11 @@
 import { useMemo, useState } from 'react';
 
+const INVALID_TAGS = /[<>]/;
+const INVALID_NAME = /[^a-zA-ZåäöÅÄÖ\s'-]/;
+const INVALID_TEXT = /[^a-zA-ZåäöÅÄÖ0-9\s.,!?'"()\n-]/;
+const INVALID_NEWLINES = /\n{5,}/;
+const INVALID_LINKS = /https?:\/\//i;
+
 function CommentForm({ onSubmit }) {
     const [name, setName] = useState('');
     const [text, setText] = useState('');
@@ -9,12 +15,6 @@ function CommentForm({ onSubmit }) {
     const MIN_COMMENT = 2;
     const MAX_NAME = 100;
     const MIN_NAME = 2;
-
-    const INVALID_TAGS = /[<>]/;
-    const INVALID_NAME = /[^a-zA-ZåäöÅÄÖ\s'-]/;
-    const INVALID_TEXT = /[^a-zA-ZåäöÅÄÖ0-9\s.,!?'"()\n-]/;
-    const INVALID_NEWLINES = /\n{5,}/;
-    const INVALID_LINKS = /https?:\/\//i;
 
     const trimmedName = name.trim();
     const trimmedText = text.trim();
@@ -64,7 +64,14 @@ function CommentForm({ onSubmit }) {
         }
 
         return e;
-    }, [nameLen, textLen, touched.name, touched.text]);
+    }, [
+        nameLen,
+        textLen,
+        touched.name,
+        touched.text,
+        trimmedName,
+        trimmedText,
+    ]);
 
     const isValid =
         nameLen >= MIN_NAME &&
