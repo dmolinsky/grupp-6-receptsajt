@@ -1,15 +1,22 @@
 import { useParams } from 'react-router-dom';
-import Recipe from '../../components/Recipe/Recipe';
+import CommentSection from '../../components/comment/CommentSection.jsx';
+import { ErrorMessage } from '../../components/common/ErrorMessage.jsx';
 import Rating from '../../components/rating/Rating';
-
-import CommentSection from 'src/components/comment/CommentSection.jsx';
+import Recipe from '../../components/Recipe/Recipe';
+import { useRecipe } from '../../hooks/useRecipe';
+import NotFound from '../notFound/NotFound';
 
 function RecipePage() {
     const { recipeId } = useParams();
+    const { recipe, loading, error } = useRecipe(recipeId);
+
+    if (loading) return <p>Loading recipe...</p>;
+    if (error) return <ErrorMessage error={error} />;
+    if (!recipe) return <NotFound />;
 
     return (
         <div className="recipe-page">
-            <Recipe recipeId={recipeId} />
+            <Recipe recipe={recipe} />
             <Rating />
             <CommentSection recipeId={recipeId} />
         </div>
