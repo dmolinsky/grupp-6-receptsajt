@@ -29,7 +29,7 @@ function SearchBar({ defaultValue = "", onSearch }) {
 
     return (
         <form className="searchbar" noValidate onSubmit={handleSubmit}>
-            <div className="searchbar_control">
+            <div className="searchbar__control">
                 <span className="searchbar__icon" aria-hidden="true">🔍</span>
 
                 <input
@@ -57,8 +57,8 @@ function SearchBar({ defaultValue = "", onSearch }) {
 
             <div
                 id="searchbar-error"
+                className="searchbar__error"
                 role={hasError ? 'alert' : undefined}
-                className={`searchbar__msg${hasError ? ' is-visible' : ''}`}
             >
                 {error}
             </div>
