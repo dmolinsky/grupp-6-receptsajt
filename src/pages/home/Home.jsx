@@ -1,8 +1,8 @@
-import SearchBar from '../../components/searchbar/SearchBar.jsx';
-import RecipeGrid from '../../components/RecipeGrid/RecipeGrid';
-import CategoryList from '../../components/categoryList/CategoryList';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { RecipeGridContainer } from '../../components/RecipeGrid/RecipeGrid';
+import CategoryList from '../../components/categoryList/CategoryList';
+import SearchBar from '../../components/searchbar/SearchBar.jsx';
 
 function Home() {
     const [searchQuery, setSearchQuery] = useState('');
@@ -36,7 +36,7 @@ function Home() {
                 )}
             </div>
 
-            <RecipeGrid searchQuery={searchQuery} />
+            <RecipeGridContainer searchQuery={searchQuery} />
         </main>
     );
 }
