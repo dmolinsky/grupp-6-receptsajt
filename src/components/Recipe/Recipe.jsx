@@ -1,47 +1,8 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { getRecipeById } from '../../utils/getRecipeById';
-import {
-    mapApiIngredients,
-    mapApiInstructions,
-    mapApiRecipe,
-} from '../../utils/recipeMappers';
+import StarRating from '../../components/starRating/StarRating.jsx';
 import DifficultyBadge from '../DifficultyBadge/DifficultyBadge';
 
-import StarRating from 'src/components/starRating/StarRating.jsx';
-
-function Recipe() {
-    const { recipeId } = useParams();
-    const [recipe, setRecipe] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-
-    useEffect(() => {
-        async function fetchRecipe() {
-            try {
-                const data = await getRecipeById(recipeId);
-
-                const mappedRecipe = {
-                    ...mapApiRecipe(data),
-                    ingredients: mapApiIngredients(data.ingredients),
-                    instructions: mapApiInstructions(data.instructions),
-                };
-
-                setRecipe(mappedRecipe);
-            } catch (err) {
-                console.error(err);
-                setError('Kunde inte hämta receptet 😞');
-            } finally {
-                setLoading(false);
-            }
-        }
-
-        fetchRecipe();
-    }, [recipeId]);
-
-    if (loading) return <p>Laddar recept...</p>;
-    if (error) return <p>{error}</p>;
-    if (!recipe) return <p>Receptet kunde inte hittas. 😞</p>;
+function Recipe({ recipe }) {
+    if (!recipe) return null;
 
     const {
         title,
@@ -110,4 +71,5 @@ function Recipe() {
         </article>
     );
 }
+
 export default Recipe;
