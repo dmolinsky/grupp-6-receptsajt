@@ -389,11 +389,6 @@ button:hover {
     margin: 0 0 var(--spacing-xs) 0;
 }
 
-.recipe-card-rating p {
-    color: var(--color-red);
-    font-size: 1.5rem;
-}
-
 .recipe-card-description {
     order: 3;
     margin: 0 var(--spacing-sm) var(--spacing-md);
@@ -707,7 +702,22 @@ button:hover {
 
 .ratingMessage {
     color: var(--color-dark);
-    margin: var(--spacing-sm) 0;
+    margin: var(--spacing-sm);
+}
+
+.rating-display span {
+    color: var(--color-red);
+    font-size: 1.5rem;
+}
+
+.recipe-rating .rating-display {
+    margin-top: -10px;
+    padding-bottom: var(--spacing-sm);
+}
+
+.recipe-rating .rating-display span {
+    padding-bottom: var(--spacing-sm);
+    font-size: 2rem;
 }
 
 /* -----COMMENT COMPONENTS----- */
