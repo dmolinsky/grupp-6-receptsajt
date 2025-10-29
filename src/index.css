@@ -351,6 +351,7 @@ button:hover {
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--spacing-md);
+    align-items: stretch;
 }
 
 @media (min-width: 768px) {
@@ -371,12 +372,19 @@ button:hover {
     text-align: center;
     border-radius: 8px;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
-.recipe-card-img {
-    max-width: 100%;
-    border-radius: 8px 8px 0 0;
-    display: block;
+.recipe-card h3 {
+    order: 1;
+    margin: var(--spacing-sm) 0 0 0;
+}
+
+.recipe-card-rating {
+    order: 2;
+    margin: 0 0 var(--spacing-xs) 0;
 }
 
 .recipe-card-rating p {
@@ -385,20 +393,66 @@ button:hover {
 }
 
 .recipe-card-description {
-    margin: var(--spacing-sm);
+    order: 3;
+    margin: 0 var(--spacing-sm) var(--spacing-md);
+    flex: 1 1 auto;
 }
 
 .recipe-card-details {
-    padding-bottom: var(--spacing-sm);
+    order: 4;
+    margin: 0;
+    padding: var(--spacing-sm);
+    border-top: 1px solid
+        color-mix(in oklab, var(--color-dark) 10%, transparent);
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    align-items: center;
+    margin-top: auto;
 }
 
 .recipe-card-details span {
-    margin: var(--spacing-sm);
-    font-weight: bold;
+    margin: 0;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+:root {
+    --thumb-w: 4;
+    --thumb-h: 3;
 }
 
 .recipe-card-image-wrapper {
+    order: 0;
     position: relative;
+    aspect-ratio: var(--thumb-w) / var(--thumb-h);
+    width: 100%;
+    overflow: hidden;
+    border-radius: 8px 8px 0 0;
+}
+
+.recipe-card-img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: 50% 50%;
+}
+
+.recipe-img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+@media (min-width: 768px) {
+    .recipe-img {
+        aspect-ratio: var(--thumb-w) / var(--thumb-h);
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        object-position: 50% 50%;
+    }
 }
 
 /* -----RECIPE PAGE----- */
@@ -611,7 +665,7 @@ button:hover {
     width: 90%;
     margin-left: 5%;
     margin-right: 5%;
-}
+} 
 
 .ratingHeading {
     color: var(--color-green);
