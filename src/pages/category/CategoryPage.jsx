@@ -1,14 +1,22 @@
-import RecipeGrid from '../../components/RecipeGrid/RecipeGrid';
-import { useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import CategoryList from '../../components/categoryList/CategoryList';
+import { ErrorMessage } from '../../components/common/ErrorMessage';
+import RecipeGrid from '../../components/RecipeGrid/RecipeGrid';
+import { useCategory } from '../../hooks/useCategory';
 
 function CategoryPage() {
-    const { categoryId } = useParams();
+    const { categoryName } = useParams();
+    const { recipes, loading, error } = useCategory(categoryName);
+
+    if (loading) return <p>Loading recipes...</p>;
+    if (error) return <ErrorMessage error={error} />;
+    if (!recipes || recipes.length === 0)
+        return <Navigate to="/not-found" replace />;
 
     return (
         <main>
             <CategoryList />
-            <RecipeGrid category={categoryId} />
+            <RecipeGrid recipes={recipes} />
         </main>
     );
 }
