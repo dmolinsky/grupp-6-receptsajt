@@ -49,7 +49,7 @@ function Recipe() {
         image,
         cookingTime,
         ingredientsCount,
-        // rating,
+        rating,
         ingredients,
         instructions,
         difficulty,
@@ -66,7 +66,7 @@ function Recipe() {
                     <DifficultyBadge level={difficulty} />
                 </div>
                 <div className="recipe-rating">
-                    <StarRating rating={recipe.rating} />
+                    <StarRating rating={rating} />
                 </div>
                 <p className="recipe-meta">
                     {ingredientsCount} ingredienser · {cookingTime}
