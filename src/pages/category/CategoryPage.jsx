@@ -8,8 +8,9 @@ function CategoryPage() {
     const { categoryName } = useParams();
     const { recipes, loading, error } = useCategory(categoryName);
 
-    if (loading) return <p>Loading recipes...</p>;
-    if (error) return <ErrorMessage error={error} />;
+    if (loading) return <p>Laddar recept</p>;
+    if (error)
+        return <ErrorMessage title="Kunde inte hämta kategori" error={error} />;
     if (!recipes || recipes.length === 0)
         return <Navigate to="/not-found" replace />;
 

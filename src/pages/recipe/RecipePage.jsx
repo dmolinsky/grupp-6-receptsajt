@@ -10,8 +10,9 @@ function RecipePage() {
     const { recipeId } = useParams();
     const { recipe, loading, error } = useRecipe(recipeId);
 
-    if (loading) return <p>Loading recipe...</p>;
-    if (error) return <ErrorMessage error={error} />;
+    if (loading) return <p>Laddar recept</p>;
+    if (error)
+        return <ErrorMessage title="Kunde inte hämta receptet" error={error} />;
     if (!recipe) return <NotFound />;
 
     return (
