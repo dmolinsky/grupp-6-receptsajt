@@ -20,10 +20,7 @@ export const useCategory = (category, searchQuery) => {
 
         getRecipes()
             .then((data) => setRecipes(mapApiRecipes(data)))
-            .catch((err) => {
-                console.error(err);
-                setError(err);
-            })
+            .catch((err) => setError(err))
             .finally(() => setLoading(false));
 
         return () => {

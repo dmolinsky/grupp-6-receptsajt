@@ -23,10 +23,7 @@ export const useRecipe = (recipeId) => {
                     instructions: mapApiInstructions(data.instructions),
                 })
             )
-            .catch((err) => {
-                console.error(err);
-                setError(err);
-            })
+            .catch((err) => setError(err))
             .finally(() => setLoading(false));
 
         return () => {
