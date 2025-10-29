@@ -110,10 +110,12 @@ button:hover {
 }
 
 /* -----LAYOUT----- */
+
 .container {
     max-width: var(--max-width);
     margin: 0 auto;
     padding: 0 var(--spacing-md) var(--spacing-md);
+    min-height: 85lvh;
 }
 
 /* -----UTILITY----- */
@@ -951,4 +953,22 @@ input {
     .comment-form__textarea {
         min-height: 7rem;
     }
+}
+
+/* -----FOOTER----- */
+footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    max-width: 90%;
+    padding-top: var(--spacing-sm);
+    padding-left: 5%;
+    padding-bottom: var(--spacing-sm);
+}
+
+footer small {
+    color: var(--color-dark);
+    opacity: 0.8;
 }

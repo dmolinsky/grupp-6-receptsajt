@@ -5,6 +5,7 @@ import Home from './pages/home/Home.jsx';
 import CategoryPage from './pages/category/CategoryPage.jsx';
 import RecipePage from './pages/recipe/RecipePage.jsx';
 import NotFound from './pages/notFound/NotFound.jsx';
+import Footer from './components/footer/Footer';
 
 function App() {
     return (
@@ -21,6 +22,7 @@ function App() {
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </main>
+            <Footer />
         </div>
     );
 }
