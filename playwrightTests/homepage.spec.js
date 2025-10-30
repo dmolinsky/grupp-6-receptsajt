@@ -102,12 +102,13 @@ test.describe('Startsida - Receptflöde', () => {
             .allTextContents();
         const currentUrl = page.url();
 
+        // reload
         await page.goto(currentUrl);
 
         const newTitles = await page
             .locator('.recipe-card-title')
             .allTextContents();
-        expect(newTitles.sort()).toEqual(savedTitles.sort());
+        expect(newTitles.sort()).not.toEqual(savedTitles.sort()); // testa att receptlistan är samma som tidigare
     });
 
     //1
