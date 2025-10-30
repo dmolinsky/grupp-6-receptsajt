@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useRecipes } from '../../hooks/useRecipes';
 import RecipeCard from '../RecipeCard/RecipeCard';
+import { ErrorMessage } from '../common/ErrorMessage';
 
 function RecipeGrid({ recipes }) {
     return (
@@ -25,7 +26,8 @@ export function RecipeGridContainer({ category, searchQuery }) {
     }, [recipes, searchQuery]);
 
     if (loading) return <p>Laddar recept</p>;
-    if (error) return <p>{error.message}</p>;
+    if (error)
+        return <ErrorMessage title="Kunde inte hämta recept" error={error} />;
     if (!recipes || recipes.length === 0)
         return <Navigate to="/not-found" replace />;
 
