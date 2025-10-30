@@ -55,8 +55,6 @@ function Recipe() {
         difficulty,
     } = recipe;
 
-    console.log(image);
-
     return (
         <article className="recipe-page-grid">
             {/* Details */}
@@ -100,7 +98,7 @@ function Recipe() {
 
             {/* Instructions */}
             <section className="recipe-instructions">
-                <h3>Gör såhär:</h3>
+                <h3>Gör så här:</h3>
                 <ol>
                     {instructions.map((item, i) => (
                         <li key={i} className="round-md">
