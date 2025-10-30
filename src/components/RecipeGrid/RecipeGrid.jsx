@@ -4,44 +4,58 @@ import { getRecipesByCategory } from '../../utils/getRecipesByCategory';
 import { mapApiRecipes } from '../../utils/recipeMappers';
 import RecipeCard from '../RecipeCard/RecipeCard';
 
-function RecipeGrid({ category = null, searchQuery = null }) {
+function RecipeGrid({ category = null, searchQuery = '' }) {
     const [recipes, setRecipes] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
+        let cancelled = false;
+
         async function fetchRecipes() {
             try {
-                let data;
+                setLoading(true);
+                setError(null);
 
-                if (category) {
-                    data = await getRecipesByCategory(category);
-                } else if (searchQuery) {
-                    // OBS PLACEHOLDER!!
-                    data = await getAllRecipes(); // ska bytas till getRecipesBySearch(searchQuery) eller liknande
-                } else {
-                    data = await getAllRecipes();
-                }
+                const data = category
+                    ? await getRecipesByCategory(category)
+                    : await getAllRecipes();
 
                 const mapped = mapApiRecipes(data);
-                setRecipes(mapped);
+                if (!cancelled) setRecipes(mapped);
             } catch (err) {
-                setError('Kunde inte hämta recept 😞');
+                if (!cancelled) setError('Kunde inte hämta recept 😞');
                 console.error(err);
             } finally {
-                setLoading(false);
+                if (!cancelled) setLoading(false);
             }
         }
+
         fetchRecipes();
-    }, [category, searchQuery]);
+        return () => {
+            cancelled = true;
+        };
+    }, [category]);
+
     if (loading) return <p>Laddar recept, vänta lite!</p>;
     if (error) return <p>{error}</p>;
 
+    const searchTerm = (searchQuery || '').trim().toLowerCase();
+    const visibleRecipes = !searchTerm
+        ? recipes
+        : recipes.filter((r) => r.title.toLowerCase().includes(searchTerm));
+
     return (
         <div className="recipe-grid">
-            {recipes.map((recipe) => (
+            {visibleRecipes.map((recipe) => (
                 <RecipeCard key={recipe.id} recipe={recipe} />
             ))}
+
+            {searchTerm && visibleRecipes.length === 0 && (
+                <p className="recipe-grid__empty">
+                    Inga recept matchar din sökning.
+                </p>
+            )}
         </div>
     );
 }
