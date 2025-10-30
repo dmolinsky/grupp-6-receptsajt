@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import DifficultyBadge from '../DifficultyBadge/DifficultyBadge';
 
+import StarRating from 'src/components/starRating/StarRating.jsx';
+
 function RecipeCard({ recipe }) {
     return (
         <div className="recipe-card round-md">
@@ -20,7 +22,7 @@ function RecipeCard({ recipe }) {
                 <h3 className="recipe-card-title">{recipe.title}</h3>
             </Link>
             <div className="recipe-card-rating">
-                <p>★★★★☆</p>
+                <StarRating rating={recipe.rating} />
             </div>
             <p className="recipe-card-description">
                 {recipe.description.length > 100
