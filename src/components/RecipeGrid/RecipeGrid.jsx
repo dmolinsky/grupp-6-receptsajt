@@ -26,10 +26,9 @@ export function RecipeGridContainer({ category, searchQuery }) {
 
     if (loading) return <p>Laddar recept</p>;
     if (error) return <p>{error.message}</p>;
-    if (!recipes || recipes.length === 0) {
-        console.log('RecipeGrid', { loading, recipes });
-        // return <Navigate to="/not-found" replace />;
-    }
+    if (!recipes || recipes.length === 0)
+        return <Navigate to="/not-found" replace />;
+
     if (searchQuery && filteredRecipes.length === 0) {
         return <p>Inga recept matchar din sökning.</p>;
     }

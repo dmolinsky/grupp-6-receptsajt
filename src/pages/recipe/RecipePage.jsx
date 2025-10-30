@@ -1,10 +1,9 @@
-import { useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import CommentSection from '../../components/comment/CommentSection.jsx';
 import { ErrorMessage } from '../../components/common/ErrorMessage.jsx';
 import Rating from '../../components/rating/Rating';
 import Recipe from '../../components/Recipe/Recipe';
 import { useRecipe } from '../../hooks/useRecipe';
-import NotFound from '../notFound/NotFound';
 
 function RecipePage() {
     const { recipeId } = useParams();
@@ -13,7 +12,7 @@ function RecipePage() {
     if (loading) return <p>Laddar recept</p>;
     if (error)
         return <ErrorMessage title="Kunde inte hämta receptet" error={error} />;
-    if (!recipe) return <NotFound />;
+    if (!recipe) return <Navigate to="/not-found" replace />;
 
     return (
         <div className="recipe-page">
