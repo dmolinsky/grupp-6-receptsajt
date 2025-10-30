@@ -193,7 +193,7 @@ button:hover {
     box-shadow: var(--shadow-sm);
 }
 
-.searchbar__field[aria-invalid="true"] {
+.searchbar__field[aria-invalid='true'] {
     border-color: var(--color-red);
 }
 
@@ -244,7 +244,9 @@ button:hover {
     box-shadow: var(--shadow-sm);
     font-size: 0.8rem;
     cursor: pointer;
-    transition: background-color 0.2s ease, transform 0.2s ease;
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease;
     visibility: visible;
     opacity: 1;
 }
@@ -255,12 +257,10 @@ button:hover {
     justify-content: flex-start;
     align-items: flex-start;
     margin-bottom: var(--spacing-sm);
-    margin-top: var(--spacing-xs)
+    margin-top: var(--spacing-xs);
 }
 
-
 @media (min-width: 768px) {
-
     .searchbar__control {
         height: 3.75rem;
     }

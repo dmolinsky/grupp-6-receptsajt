@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function SearchBar({ defaultValue = "", onSearch }) {
+function SearchBar({ defaultValue = '', onSearch }) {
     const [value, setValue] = useState(defaultValue);
     const [error, setError] = useState('');
 
@@ -23,14 +23,16 @@ function SearchBar({ defaultValue = "", onSearch }) {
         setValue('');
         setError('');
         onSearch?.('');
-    }
+    };
 
     const hasError = Boolean(error);
 
     return (
         <form className="searchbar" noValidate onSubmit={handleSubmit}>
             <div className="searchbar__control">
-                <span className="searchbar__icon" aria-hidden="true">🔍</span>
+                <span className="searchbar__icon" aria-hidden="true">
+                    🔍
+                </span>
 
                 <input
                     type="search"

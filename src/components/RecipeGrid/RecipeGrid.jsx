@@ -52,7 +52,9 @@ function RecipeGrid({ category = null, searchQuery = '' }) {
             ))}
 
             {searchTerm && visibleRecipes.length === 0 && (
-                <p className="recipe-grid__empty">Inga recept matchar din sökning.</p>
+                <p className="recipe-grid__empty">
+                    Inga recept matchar din sökning.
+                </p>
             )}
         </div>
     );

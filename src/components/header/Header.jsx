@@ -6,8 +6,7 @@ function Header() {
 
     const handleTitleClick = (e) => {
         e.preventDefault();
-            navigate('/', { state: { clearSearch: true } });
-
+        navigate('/', { state: { clearSearch: true } });
     };
 
     return (
