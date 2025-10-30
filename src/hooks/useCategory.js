@@ -3,8 +3,7 @@ import { getAllRecipes } from '../utils/getAllRecipes';
 import { getRecipesByCategory } from '../utils/getRecipesByCategory';
 import { mapApiRecipes } from '../utils/recipeMappers';
 
-export const useCategory = ({ category, searchQuery }) => {
-    const [data, setData] = useState([]);
+export const useCategory = (category) => {
     const [recipes, setRecipes] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -19,36 +18,16 @@ export const useCategory = ({ category, searchQuery }) => {
         setError(null);
 
         getRecipes()
-            .then((data) => setData(mapApiRecipes(data)))
+            .then((data) => setRecipes(mapApiRecipes(data)))
             .catch((err) => setError(err))
             .finally(() => setLoading(false));
 
         return () => {
-            setData([]);
+            setRecipes([]);
             setLoading(false);
             setError(null);
         };
     }, [category, getRecipes]);
-
-    useEffect(() => {
-        setLoading(true);
-
-        if (searchQuery) {
-            const searchTerm = (searchQuery || '').trim().toLowerCase();
-            setRecipes(
-                data.filter((r) => r.title.toLowerCase().includes(searchTerm))
-            );
-        } else {
-            setRecipes(data);
-        }
-
-        setLoading(false);
-
-        return () => {
-            setRecipes([]);
-            setLoading(false);
-        };
-    }, [data, searchQuery]);
 
     return { recipes, loading, error };
 };
