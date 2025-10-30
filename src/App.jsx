@@ -1,5 +1,6 @@
 import './index.css';
-import { Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import ScrollToTop from './components/scrollToTop/ScrollToTop.jsx';
 import Header from './components/header/Header.jsx';
 import Home from './pages/home/Home.jsx';
 import CategoryPage from './pages/category/CategoryPage.jsx';
@@ -10,6 +11,7 @@ import Footer from './components/footer/Footer';
 function App() {
     return (
         <div className="App">
+            <ScrollToTop />
             <Header />
             <main className="container">
                 <Routes>
