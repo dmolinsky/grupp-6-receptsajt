@@ -8,6 +8,8 @@ import {
 } from '../../utils/recipeMappers';
 import DifficultyBadge from '../DifficultyBadge/DifficultyBadge';
 
+import StarRating from 'src/components/starRating/StarRating.jsx';
+
 function Recipe() {
     const { recipeId } = useParams();
     const [recipe, setRecipe] = useState(null);
@@ -53,8 +55,6 @@ function Recipe() {
         difficulty,
     } = recipe;
 
-    console.log(image);
-
     return (
         <article className="recipe-page-grid">
             {/* Details */}
@@ -64,7 +64,7 @@ function Recipe() {
                     <DifficultyBadge level={difficulty} />
                 </div>
                 <div className="recipe-rating">
-                    <p>★★★★☆{rating}</p>
+                    <StarRating rating={rating} />
                 </div>
                 <p className="recipe-meta">
                     {ingredientsCount} ingredienser · {cookingTime}
@@ -98,7 +98,7 @@ function Recipe() {
 
             {/* Instructions */}
             <section className="recipe-instructions">
-                <h3>Gör såhär:</h3>
+                <h3>Gör så här:</h3>
                 <ol>
                     {instructions.map((item, i) => (
                         <li key={i} className="round-md">
