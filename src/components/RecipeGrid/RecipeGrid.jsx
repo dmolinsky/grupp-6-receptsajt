@@ -1,6 +1,6 @@
 // import { Navigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { useCategory } from '../../hooks/useCategory';
+import { useRecipes } from '../../hooks/useRecipes';
 import RecipeCard from '../RecipeCard/RecipeCard';
 
 function RecipeGrid({ recipes }) {
@@ -14,7 +14,7 @@ function RecipeGrid({ recipes }) {
 }
 
 export function RecipeGridContainer({ category, searchQuery }) {
-    const { recipes, loading, error } = useCategory(category);
+    const { recipes, loading, error } = useRecipes(category);
     const [filteredRecipes, setFilteredRecipes] = useState([]);
 
     useEffect(() => {

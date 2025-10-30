@@ -3,7 +3,7 @@ import { getAllRecipes } from '../utils/getAllRecipes';
 import { getRecipesByCategory } from '../utils/getRecipesByCategory';
 import { mapApiRecipes } from '../utils/recipeMappers';
 
-export const useCategory = (category) => {
+export const useRecipes = (category) => {
     const [recipes, setRecipes] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
