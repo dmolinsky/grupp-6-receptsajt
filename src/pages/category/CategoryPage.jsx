@@ -6,7 +6,7 @@ import { useCategory } from '../../hooks/useCategory';
 
 function CategoryPage() {
     const { categoryName } = useParams();
-    const { recipes, loading, error } = useCategory(categoryName);
+    const { recipes, loading, error } = useCategory({ category: categoryName });
 
     if (loading) return <p>Laddar recept</p>;
     if (error)
