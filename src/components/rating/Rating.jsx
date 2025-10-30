@@ -18,8 +18,6 @@ const Rating = () => {
 
     const handleClick = (value) => {
         setRating(value);
-        console.log(value);
-        console.log(recipeId);
     };
 
     const handleSend = () => {
