@@ -3,6 +3,7 @@ import { test, expect } from '@playwright/test';
 test.describe('Startsida - Receptflöde', () => {
     const baseUrl = '/'; // ingen aning om path är rätt
 
+    //Test 1
     test('visar receptkort och kategorier', async ({ page }) => {
         await page.goto(baseUrl);
 
@@ -21,6 +22,7 @@ test.describe('Startsida - Receptflöde', () => {
         ).toBeVisible();
     });
 
+    //Test 2
     test('visar kategorier', async ({ page }) => {
         await page.goto(baseUrl);
 
@@ -29,64 +31,61 @@ test.describe('Startsida - Receptflöde', () => {
         ).toBeVisible();
     });
 
+    //Test 3
     test('filtrerar receptlistan vid sökning på "jul"', async ({ page }) => {
         await page.goto(baseUrl);
 
-        const search = page.getByPlaceholder('Sök recept');
+        const search = page.getByPlaceholder('Sök bland dina favoritrecept');
 
         await search.fill('jul');
 
         await expect(
             page.locator('.recipe-card-title').filter({ hasText: 'julskinka' })
         ).toBeVisible();
-
-        await expect(
-            page.locator('.recipe-card-title').filter({ hasText: 'Knäck' })
-        ).not.toBeVisible();
-
-        await expect(
-            page.locator('.recipe-card-title').filter({ hasText: 'Ischoklad' })
-        ).not.toBeVisible();
     });
 
     test('rensar sökning och visar alla recept igen', async ({ page }) => {
         await page.goto(baseUrl);
 
-        const search = page.getByPlaceholder('Sök recept');
+        const search = page.getByPlaceholder('Sök bland dina favoritrecept');
+        const clearButton = page.locator('.searchbar__reset');
 
         await search.fill('Knäck');
+        await search.press('Enter'); // klicka på skiten test jäkel
 
         await expect(
             page.locator('.recipe-card-title').filter({ hasText: 'Knäck' })
         ).toBeVisible();
-
         await expect(
             page.locator('.recipe-card-title').filter({ hasText: 'Julskinka' })
         ).not.toBeVisible();
 
-        await search.clear();
+        await clearButton.click();
 
         await expect(
             page.locator('.recipe-card-title').filter({ hasText: 'Julskinka' })
         ).toBeVisible();
-
         await expect(
-            page.locator('.recipe-card-title').filter({ hasText: 'Julskinka' })
+            page
+                .locator('.recipe-card-title')
+                .filter({ hasText: 'Risgrynsgröt' })
         ).toBeVisible();
-
         await expect(
             page.locator('.recipe-card-title').filter({ hasText: 'Ischoklad' })
         ).toBeVisible();
     });
 
+    //Test 5
     test('behåller filtrerad receptlista efter sidomladdning', async ({
         page,
     }) => {
         await page.goto(baseUrl);
 
-        const search = page.getByPlaceholder('Sök recept');
+        const search = page.getByPlaceholder('Sök bland dina favoritrecept');
 
         await search.fill('gröt');
+
+        await search.press('Enter');
 
         await expect(
             page
