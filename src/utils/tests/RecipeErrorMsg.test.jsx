@@ -1,8 +1,8 @@
 /* global describe, it, expect, afterEach */
 import { render, screen, waitFor } from '@testing-library/react';
-import { vi } from 'vitest';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
-import Recipe from 'src/components/Recipe/Recipe.jsx';
+import { vi } from 'vitest';
+import RecipePage from '../../pages/recipe/RecipePage.jsx';
 import * as api from '../../utils/getRecipeById';
 
 vi.mock('../../utils/getRecipeById', () => ({
@@ -13,7 +13,7 @@ function renderWithRouter(recipeId = '1') {
     return render(
         <MemoryRouter initialEntries={[`/recipes/${recipeId}`]}>
             <Routes>
-                <Route path="/recipes/:recipeId" element={<Recipe />} />
+                <Route path="/recipes/:recipeId" element={<RecipePage />} />
             </Routes>
         </MemoryRouter>
     );

@@ -1036,3 +1036,34 @@ footer small {
     color: var(--color-dark);
     opacity: 0.8;
 }
+
+/* -----PAGE NOT FOUND----- */
+
+.not-found {
+    text-align: center;
+    padding: var(--spacing-lg) var(--spacing-sm);
+}
+
+.not-found img {
+    margin-top: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+    max-width: 300px;
+    width: 80%;
+    height: auto;
+}
+
+.not-found .btn {
+    display: inline-block;
+    margin-top: var(--spacing-sm);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    background: var(--color-green);
+    color: var(--color-light);
+    border-radius: 8px;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+    opacity: 0.8;
+}
+
+.not-found .btn:hover {
+    opacity: 0.7;
+}
