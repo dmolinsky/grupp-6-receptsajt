@@ -158,7 +158,7 @@ button:hover {
 
 .searchbar {
     position: relative;
-    max-width: 920px;
+    width: 100%;
     margin: var(--spacing-md) auto var(--spacing-lg);
     padding: 0;
 }
