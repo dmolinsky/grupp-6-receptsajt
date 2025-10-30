@@ -1,7 +1,7 @@
-import { describe, it, expect, vi } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import RecipeGrid from 'src/components/RecipeGrid/RecipeGrid.jsx';
+import { describe, expect, it, vi } from 'vitest';
 
 vi.mock('src/utils/getAllRecipes', () => ({
     getAllRecipes: vi.fn(),
@@ -12,8 +12,6 @@ vi.mock('src/utils/getRecipesByCategory', () => ({
 vi.mock('src/utils/recipeMappers', () => ({
     mapApiRecipes: vi.fn((data) => data),
 }));
-
-import { getAllRecipes } from 'src/utils/getAllRecipes';
 
 describe('RecipeGrid', () => {
     const mockRecipes = [
@@ -32,11 +30,9 @@ describe('RecipeGrid', () => {
     ];
 
     it('should render correct number of recipe cards', async () => {
-        getAllRecipes.mockResolvedValueOnce(mockRecipes);
-
         render(
             <MemoryRouter>
-                <RecipeGrid />
+                <RecipeGrid recipes={mockRecipes} />
             </MemoryRouter>
         );
 
