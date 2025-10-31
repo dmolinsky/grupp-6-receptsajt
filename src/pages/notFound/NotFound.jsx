@@ -14,7 +14,7 @@ function NotFoundPage() {
                 The page you are looking for does not exist or has been moved.
             </p>
             <Link to="/" className="btn">
-                Back to homepage
+                <span>Back to homepage</span>
             </Link>
         </main>
     );
