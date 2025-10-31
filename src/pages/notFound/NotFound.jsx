@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom';
+import CategoryList from '../../components/categoryList/CategoryList';
 
 function NotFoundPage() {
     return (
         <main className="not-found">
-            <h1>404 – Page not found</h1>
+            <CategoryList />
+            <h2>404 – Page not found</h2>
             <img
                 src="tomte_letar.png"
                 alt="Santa's helper is looking for a page"
