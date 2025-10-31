@@ -1,10 +1,11 @@
-import { describe, expect, it } from 'vitest';
-import { getAllRecipes } from '../../utils/getAllRecipes.js';
+import { describe, it, expect } from 'vitest';
 
-describe('getAllRecipes', () => {
-    // TODO: Enable this test after adding a fetch mock
-    it.skip('should fetch all recipes', async () => {
+import { getAllRecipes } from 'src/utils/getAllRecipes.js';
+
+describe('Integration: getAllRecipes', () => {
+    it('should fetch all recipes', async () => {
         const data = await getAllRecipes();
+
 
         expect(data).not.toBeNull();
         expect(Array.isArray(data)).toBe(true);
