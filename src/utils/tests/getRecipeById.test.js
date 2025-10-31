@@ -6,7 +6,6 @@ describe('Integration: getRecipeById', () => {
         const id = '68f8984e8a8cd70776eaf67d';
         const data = await getRecipeById(id);
 
-
         expect(data).not.toBeNull();
         expect(data).toHaveProperty('_id');
     });

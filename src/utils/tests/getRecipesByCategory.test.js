@@ -7,7 +7,6 @@ describe('Integration: getRecipesByCategory', () => {
         const category = 'varma rätter';
         const data = await getRecipesByCategory(category);
 
-
         expect(data).not.toBeNull();
         expect(Array.isArray(data)).toBe(true);
         expect(data.length).toBeGreaterThan(0);
