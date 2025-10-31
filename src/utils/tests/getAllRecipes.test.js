@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 
-import { getAllRecipes } from 'src/utils/getAllRecipes.js';
+import { getAllRecipes } from '../getAllRecipes.js';
 
 describe('Integration: getAllRecipes', () => {
     it('should fetch all recipes', async () => {

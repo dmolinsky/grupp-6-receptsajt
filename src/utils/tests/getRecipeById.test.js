@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { getRecipeById } from 'src/utils/getRecipeById.js';
+import { getRecipeById } from '../getRecipeById.js';
 
 describe('Integration: getRecipeById', () => {
     it('should fetch a recipe by id', async () => {
