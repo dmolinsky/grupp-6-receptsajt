@@ -8,9 +8,7 @@ function CommentForm({ onSubmit }) {
     const [touched, setTouched] = useState({ name: false, text: false });
 
     const MAX_COMMENT = 500;
-    const MIN_COMMENT = 2;
     const MAX_NAME = 100;
-    const MIN_NAME = 2;
 
     const trimmedName = name.trim();
     const trimmedText = text.trim();

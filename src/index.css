@@ -827,10 +827,6 @@ input {
     min-height: 8rem;
 }
 
-.comment-form__input {
-    grid-area: input;
-}
-
 @media (min-width: 1024px) {
     .comment-form__textarea {
         min-height: 10rem;
@@ -854,6 +850,7 @@ input {
     min-height: unset;
     resize: none;
     width: 100%;
+    grid-area: input;
 }
 
 @media (max-width: 764px) {
