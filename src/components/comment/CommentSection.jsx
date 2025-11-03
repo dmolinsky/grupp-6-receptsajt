@@ -10,6 +10,7 @@ function CommentSection({ recipeId }) {
     const [comments, setComments] = useState([]);
     const [flash, setFlash] = useState('');
     const [error, setError] = useState('');
+    const [showForm, setShowForm] = useState(true);
 
     useEffect(() => {
         async function fetchComments() {
@@ -18,9 +19,13 @@ function CommentSection({ recipeId }) {
                 const mapped = mapApiComment(data);
 
                 setComments(mapped);
+                setShowForm(true);
+                setFlash('');
+                setError('');
             } catch (err) {
                 console.error('Kunde inte hämta kommentarer:', err);
                 setError('Kunde inte hämta kommentarer. 😞');
+                setShowForm(true);
             }
         }
 
@@ -49,9 +54,11 @@ function CommentSection({ recipeId }) {
 
             setComments((prev) => [newComment, ...prev]);
             setFlash('Tack för din kommentar!');
+            setShowForm(false);
         } catch (err) {
             console.error('Kunde inte spara kommentaren:', err);
             setError('Kunde inte spara kommentaren. :( Försök igen. ');
+            setShowForm(true);
         }
     }
 
@@ -61,11 +68,14 @@ function CommentSection({ recipeId }) {
             aria-labelledby="comments-title"
             data-recipe-id={recipeId}
         >
-            <h2 id="comments-title" className="comment-section__title">
-                Kommentarer
-            </h2>
+            {showForm && (
+                <h2 id="comments-title" className="comment-section__title">
+                    Kommentarer
+                </h2>
+            )}
 
-            <CommentForm onSubmit={handleAddComment} />
+
+            {showForm && <CommentForm onSubmit={handleAddComment} />}
             {flash && (
                 <p className="comment-form__flash" role="status">
                     {flash}
