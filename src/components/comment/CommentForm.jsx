@@ -20,13 +20,30 @@ function CommentForm({ onSubmit }) {
         [name, text, touched]
     );
 
-    const isValid = Object.keys(errors).length === 0;
+    const bothTouched = touched.name && touched.text;
+    const isValid = bothTouched && Object.keys(errors).length === 0;
 
     function handleSubmit(e) {
         e.preventDefault();
-        setTouched({ name: true, text: true });
-        if (!isValid) return;
+
+        const nextTouched = { name: true, text: true };
+        const nextErrors = validateComment({
+            name,
+            text,
+            touched: nextTouched,
+        });
+        const nextIsValid =
+            nextTouched.name &&
+            nextTouched.text &&
+            Object.keys(nextErrors).length === 0;
+
+        if (!nextIsValid) {
+            setTouched(nextTouched);
+            return;
+        }
+
         onSubmit({ name: trimmedName, text: trimmedText });
+
         setName('');
         setText('');
         setTouched({ name: false, text: false });
@@ -48,7 +65,7 @@ function CommentForm({ onSubmit }) {
                     maxLength={MAX_COMMENT}
                     rows={4}
                     aria-invalid={!!errors.text}
-                    aria-describedby="comment-text-hint"
+                    aria-describedby={errors.text ? 'comment-text-error' : 'comment-text-hint'}
                 />
                 <small id="comment-text-hint" className="hint">
                     <span>
@@ -57,7 +74,10 @@ function CommentForm({ onSubmit }) {
                 </small>
             </div>
             <div className="comment-form__meta">
-                {errors.text && <small className="error">{errors.text}</small>}
+                {errors.text &&
+                    <small id="comment-text-error" className="error" role="alert">
+                        {errors.text}
+                    </small>}
             </div>
 
             <label htmlFor="comment-name" className="comment-form__label">
@@ -75,6 +95,7 @@ function CommentForm({ onSubmit }) {
                         onBlur={() => setTouched((t) => ({ ...t, name: true }))}
                         maxLength={MAX_NAME}
                         aria-invalid={!!errors.name}
+                        aria-describedby={errors.name ? 'comment-name-error' : undefined}
                     />
                     <small id="input-hint" className="hint">
                         <span>
@@ -85,7 +106,9 @@ function CommentForm({ onSubmit }) {
 
                 <div className="comment-form__meta">
                     {errors.name && (
-                        <small className="error">{errors.name}</small>
+                        <small id="comment-name-error" className="error" role="alert">
+                            {errors.name}
+                        </small>
                     )}
                 </div>
 
