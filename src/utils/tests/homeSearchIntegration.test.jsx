@@ -7,51 +7,36 @@ import App from '../../App';
 
 const mockRecipes = [
     {
-        id: '1',
+        _id: 1,
         title: 'Lussebullar',
         description: 'Mjuka lussebullar med saffran',
-        image: '/images/lussebullar.png',
+        imageUrl: '/images/lussebullar.png',
         avgRating: 3,
         price: 1,
         ingredients: [],
-        instructions: [],
-        cookingTime: 10,
+        timeInMins: 120,
     },
     {
-        id: '2',
+        _id: 2,
         title: 'Julskinka',
         description: 'Klassisk svensk julskinka',
-        image: '/images/julskinka.png',
+        imageUrl: '/images/julskinka.png',
         avgRating: 4,
-        price: 2,
+        price: 1,
         ingredients: [],
-        instructions: [],
-        cookingTime: 20,
+        timeInMins: 90,
     },
     {
-        id: '3',
+        _id: 3,
         title: 'Rödbetssallad',
         description: 'Enkel och klassisk rödbetssallad',
-        image: '/images/rödbetssallad.png',
+        imageUrl: '/images/rödbetssallad.png',
         avgRating: 5,
-        price: 3,
+        price: 1,
         ingredients: [],
-        instructions: [],
-        cookingTime: 30,
+        timeInMins: 10,
     },
 ];
-
-function makeFetchMock() {
-    return vi.fn(async (url) => {
-        if (String(url).includes('/recipes')) {
-            return { ok: true, json: async () => mockRecipes }
-        }
-        if (String(url).includes('/categories')) {
-            return { ok: true, json: async () => [] }
-        }
-        return { ok: true, status: 404, json: async () => ({}) };
-    });
-}
 
 function renderHome() {
     return render(
@@ -63,14 +48,26 @@ function renderHome() {
 
 describe('Home search integration', () => {
     beforeEach(() => {
-        vi.spyOn(window, 'fetch').mockImplementation(makeFetchMock());
+        window.scrollTo = vi.fn();
+
+        vi.spyOn(window, 'fetch').mockImplementation(async (input) => {
+            const url = typeof input === 'string' ? input : input.url;
+
+            if (url.includes('/recipes')) {
+                return { ok: true, json: async () => mockRecipes };
+            }
+            if (url.includes('/categories')) {
+                return { ok: true, json: async () => [] };
+            }
+            return { ok: false, status: 404, json: async () => ({}), };
+        });
     });
 
     afterEach(() => {
         vi.restoreAllMocks();
     });
 
-    it('filters recipes via the search field and clearing shows all recipes again', async () => {
+    it('shows all recipes, filters by search, restores recipes on clear', async () => {
         renderHome();
 
         await screen.findByAltText('Lussebullar');
@@ -80,11 +77,15 @@ describe('Home search integration', () => {
         const searchbox = screen.getByRole('searchbox');
         await userEvent.type(searchbox, 'Skinka{enter}');
 
-        expect(await screen.findByAltText('Skinka')).toBeInTheDocument();
+        expect(await screen.findByAltText('Julskinka')).toBeInTheDocument();
         expect(screen.queryByAltText('Lussebullar')).not.toBeInTheDocument();
         expect(screen.queryByAltText('Rödbetssallad')).not.toBeInTheDocument();
 
         const clearButton = await screen.findByRole('button', { name: /rensa sökning/i });
         await userEvent.click(clearButton);
+
+        expect(await screen.findByAltText('Julskinka')).toBeInTheDocument();
+        expect(await screen.findByAltText('Lussebullar')).toBeInTheDocument();
+        expect(await screen.findByAltText('Rödbetssallad')).toBeInTheDocument();
     });
 });
