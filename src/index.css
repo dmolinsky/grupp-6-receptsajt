@@ -795,7 +795,7 @@ input {
     width: 100%;
     margin-bottom: var(--spacing-sm, 1rem);
     border-bottom: 1px solid
-    color-mix(in oklab, var(--color-dark) 15%, transparent);
+        color-mix(in oklab, var(--color-dark) 15%, transparent);
     margin-left: 0;
 }
 

@@ -74,7 +74,6 @@ function CommentSection({ recipeId }) {
                 </h2>
             )}
 
-
             {showForm && <CommentForm onSubmit={handleAddComment} />}
             {flash && (
                 <p className="comment-form__flash" role="status">
@@ -87,9 +86,7 @@ function CommentSection({ recipeId }) {
                 </p>
             )}
 
-                <h3 className="comment-section__title">
-                    Tidigare kommentarer
-                </h3>
+            <h3 className="comment-section__title">Tidigare kommentarer</h3>
 
             <CommentList comments={comments} />
         </section>

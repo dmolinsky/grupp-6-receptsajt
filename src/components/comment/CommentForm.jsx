@@ -65,7 +65,9 @@ function CommentForm({ onSubmit }) {
                     maxLength={MAX_COMMENT}
                     rows={4}
                     aria-invalid={!!errors.text}
-                    aria-describedby={errors.text ? 'comment-text-error' : 'comment-text-hint'}
+                    aria-describedby={
+                        errors.text ? 'comment-text-error' : 'comment-text-hint'
+                    }
                 />
                 <small id="comment-text-hint" className="hint">
                     <span>
@@ -74,10 +76,15 @@ function CommentForm({ onSubmit }) {
                 </small>
             </div>
             <div className="comment-form__meta">
-                {errors.text &&
-                    <small id="comment-text-error" className="error" role="alert">
+                {errors.text && (
+                    <small
+                        id="comment-text-error"
+                        className="error"
+                        role="alert"
+                    >
                         {errors.text}
-                    </small>}
+                    </small>
+                )}
             </div>
 
             <label htmlFor="comment-name" className="comment-form__label">
@@ -95,7 +102,9 @@ function CommentForm({ onSubmit }) {
                         onBlur={() => setTouched((t) => ({ ...t, name: true }))}
                         maxLength={MAX_NAME}
                         aria-invalid={!!errors.name}
-                        aria-describedby={errors.name ? 'comment-name-error' : undefined}
+                        aria-describedby={
+                            errors.name ? 'comment-name-error' : undefined
+                        }
                     />
                     <small id="input-hint" className="hint">
                         <span>
@@ -106,7 +115,11 @@ function CommentForm({ onSubmit }) {
 
                 <div className="comment-form__meta">
                     {errors.name && (
-                        <small id="comment-name-error" className="error" role="alert">
+                        <small
+                            id="comment-name-error"
+                            className="error"
+                            role="alert"
+                        >
                             {errors.name}
                         </small>
                     )}
