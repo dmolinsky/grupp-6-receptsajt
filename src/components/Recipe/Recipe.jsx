@@ -42,7 +42,7 @@ function Recipe({ recipe }) {
                 <table>
                     <tbody>
                         {ingredients?.map((item, i) => (
-                            <tr key={i}>
+                            <tr key={item.name}>
                                 <td>
                                     <span>
                                         {item.amount} {item.unit}
@@ -62,7 +62,7 @@ function Recipe({ recipe }) {
                 <h3>Gör så här:</h3>
                 <ol>
                     {instructions.map((item, i) => (
-                        <li key={i} className="round-md">
+                        <li key={`${item}-${i}`} className="round-md">
                             <span>{item}</span>
                         </li>
                     ))}
