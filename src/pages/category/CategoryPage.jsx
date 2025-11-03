@@ -1,23 +1,39 @@
-import { Navigate, useParams } from 'react-router-dom';
 import CategoryList from '../../components/categoryList/CategoryList';
-import { ErrorMessage } from '../../components/common/ErrorMessage';
-import RecipeGrid from '../../components/RecipeGrid/RecipeGrid';
-import { useRecipes } from '../../hooks/useRecipes';
+import { RecipeGridContainer } from '../../components/RecipeGrid/RecipeGrid';
+import { useState, useEffect } from 'react';
+import { useParams, Navigate } from 'react-router-dom';
+import { getAllCategories } from '../../utils/getAllCategories';
 
 function CategoryPage() {
     const { categoryName } = useParams();
-    const { recipes, loading, error } = useRecipes(categoryName);
+    const [validCategory, setValidCategory] = useState(null);
 
-    if (loading) return <p>Laddar recept</p>;
-    if (error)
-        return <ErrorMessage title="Kunde inte hämta kategori" error={error} />;
-    if (!recipes || recipes.length === 0)
-        return <Navigate to="/not-found" replace />;
+    useEffect(() => {
+        async function checkCategory() {
+            try {
+                const categories = await getAllCategories();
+                const exists = categories.some(
+                    (c) => c.name.toLowerCase() === categoryName.toLowerCase()
+                );
+
+                setValidCategory(exists);
+            } catch {
+                setValidCategory(false);
+            }
+        }
+        checkCategory();
+    }, [categoryName]);
+
+    if (validCategory === null) {
+        return <p>Laddar kategori...</p>;
+    }
+
+    if (!validCategory) return <Navigate to="/not-found" replace />;
 
     return (
         <main>
             <CategoryList />
-            <RecipeGrid recipes={recipes} />
+            <RecipeGridContainer category={categoryName} />
         </main>
     );
 }

@@ -1041,7 +1041,11 @@ footer small {
 
 .not-found {
     text-align: center;
-    padding: var(--spacing-lg) var(--spacing-sm);
+    padding: 0 var(--spacing-sm);
+}
+
+.not-found h2 {
+    padding-top: var(--spacing-lg);
 }
 
 .not-found img {
@@ -1057,7 +1061,6 @@ footer small {
     margin-top: var(--spacing-sm);
     padding: var(--spacing-xs) var(--spacing-sm);
     background: var(--color-green);
-    color: var(--color-light);
     border-radius: 8px;
     text-decoration: none;
     transition: opacity 0.2s ease;
@@ -1102,4 +1105,12 @@ footer small {
     font-size: 2.5rem;
     color: var(--color-green);
     margin-bottom: 0;
+  
+.not-found span {
+    color: var(--color-light);
+}
+
+.empty-state {
+    text-align: center;
+    padding-top: var(--spacing-lg);
 }
