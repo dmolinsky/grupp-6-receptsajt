@@ -30,6 +30,7 @@ function validateName(name, touched) {
 
 function validateText(text, touched) {
     if (!touched) return null;
+    const rawText = text;
     const normalized = rawText.replaceAll('\r\n', '\n');
     const trimmed = text.trim();
     const len = trimmed.length;
@@ -45,7 +46,7 @@ function validateText(text, touched) {
     if (INVALID_TEXT.test(trimmed)) {
         return 'Kommentaren innehåller otillåtna tecken.';
     }
-    if (INVALID_NEWLINES.test(raw)) {
+    if (INVALID_NEWLINES.test(normalized)) {
         return 'Kommentaren får inte innehålla för många radbrytningar.';
     }
     if (INVALID_LINKS.test(trimmed)) {
