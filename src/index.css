@@ -1105,7 +1105,8 @@ footer small {
     font-size: 2.5rem;
     color: var(--color-green);
     margin-bottom: 0;
-  
+}
+
 .not-found span {
     color: var(--color-light);
 }
