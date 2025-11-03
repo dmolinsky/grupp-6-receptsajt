@@ -6,8 +6,7 @@ describe('textSanitizer', () => {
         const dirtyRecipe = {
             _id: '68f8984e8a8cd70776eaf67d',
             title: 'Julskinka<script>alert(1)</script>',
-            description:
-                'Klassisk svensk<script>alert(2)</script> julskinka',
+            description: 'Klassisk svensk<script>alert(2)</script> julskinka',
             imageUrl: '<script>alert(5)</script>',
             timeInMins: 90,
             price: 1,
