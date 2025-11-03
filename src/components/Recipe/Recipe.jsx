@@ -41,7 +41,7 @@ function Recipe({ recipe }) {
                 <h3>Ingredienser:</h3>
                 <table>
                     <tbody>
-                        {ingredients?.map((item, i) => (
+                        {ingredients?.map((item) => (
                             <tr key={item.name}>
                                 <td>
                                     <span>
