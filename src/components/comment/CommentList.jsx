@@ -11,7 +11,7 @@ function CommentList({ comments }) {
     }
 
     return (
-        <ul className="comment-list" role="list">
+        <ul className="comment-list">
             {comments.map((c) => (
                 <CommentItem key={c.id || `${c.name}-${c.date}`} comment={c} />
             ))}

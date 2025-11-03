@@ -1,4 +1,3 @@
-// import { Navigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useRecipes } from '../../hooks/useRecipes';
 import RecipeCard from '../RecipeCard/RecipeCard';
