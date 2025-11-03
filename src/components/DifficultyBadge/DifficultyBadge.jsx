@@ -15,9 +15,6 @@ function DifficultyBadge({ level }) {
             text = 'Svår';
             colorClass = 'difficulty-hard';
             break;
-        default:
-            text = '';
-            colorClass = '';
     }
 
     return (

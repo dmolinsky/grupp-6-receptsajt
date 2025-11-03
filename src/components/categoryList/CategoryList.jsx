@@ -28,10 +28,10 @@ function CategoryList() {
             <div className="category-list">
                 <h3>Kategorier:</h3>
                 {error && <p>{error}</p>}
-                {categories.map((category, index) => (
-                    <div className="category-link" key={category.name || index}>
+                {categories.map((category) => (
+                    <div className="category-link" key={category.name}>
                         <NavLink to={`/category/${category.name}`}>
-                            <span key={index}>
+                            <span>
                                 {category.name.charAt(0).toUpperCase() +
                                     category.name.slice(1)}{' '}
                                 ({category.count})
@@ -52,9 +52,9 @@ function CategoryList() {
                 </button>
 
                 <div className={`dropdown ${showMenu ? 'show' : ''}`}>
-                    {categories.map((category, index) => (
+                    {categories.map((category) => (
                         <NavLink
-                            key={index}
+                            key={category.name}
                             to={`/category/${category.name}`}
                             onClick={() => setShowMenu(false)}
                         >
