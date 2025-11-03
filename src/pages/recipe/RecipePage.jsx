@@ -11,7 +11,12 @@ function RecipePage() {
 
     if (loading) return <p>Laddar recept</p>;
     if (error)
-        return <ErrorMessage title="Kunde inte hämta receptet" error={error} />;
+        return (
+            <ErrorMessage
+                title="Kunde inte hämta receptet"
+                error={'Ett oväntat fel uppstod!'}
+            />
+        );
     if (!recipe) return <Navigate to="/not-found" replace />;
 
     return (
