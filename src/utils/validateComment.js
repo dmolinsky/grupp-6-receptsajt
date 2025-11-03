@@ -1,6 +1,6 @@
 const INVALID_TAGS = /[<>]/;
 const INVALID_NAME = /[^a-zA-ZåäöÅÄÖ\s'-]/;
-const INVALID_TEXT = /[^a-zA-ZåäöÅÄÖ0-9\s.,!?'"()\n-]/;
+const INVALID_TEXT = /[^a-zA-ZåäöÅÄÖ0-9\s.,!?'"()-]/;
 const INVALID_NEWLINES = /(\r?\n){5,}/;
 const INVALID_LINKS = /https?:\/\//i;
 
