@@ -7,7 +7,7 @@ function NotFoundPage() {
             <CategoryList />
             <h2>404 – Page not found</h2>
             <img
-                src="tomte_letar.png"
+                src="/tomte_letar.png"
                 alt="Santa's helper is looking for a page"
             />
             <p>
