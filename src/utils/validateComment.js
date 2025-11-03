@@ -30,7 +30,7 @@ function validateName(name, touched) {
 
 function validateText(text, touched) {
     if (!touched) return null;
-    const raw = text.replace(/\r\n/g, '\n');
+    const normalized = rawText.replaceAll('\r\n', '\n');
     const trimmed = text.trim();
     const len = trimmed.length;
 
