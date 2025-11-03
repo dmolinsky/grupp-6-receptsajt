@@ -26,11 +26,13 @@ const mockRecipes = [
     },
 ];
 
-const mockCategories = [
-    { name: 'Varma rätter', count: 3 },
-    { name: 'Söta rätter', count: 3 },
-    { name: 'Kalla rätter', count: 3 },
-];
+vi.mock('../../utils/getAllCategories', () => ({
+    getAllCategories: vi.fn().mockResolvedValue([
+        { name: 'Varma rätter', count: 3 },
+        { name: 'Söta rätter', count: 3 },
+        { name: 'Kalla rätter', count: 3 },
+    ]),
+}));
 
 function renderHome() {
     return render(
@@ -50,9 +52,6 @@ describe('Home UI integration', () => {
             if (url.includes('/recipes')) {
                 return { ok: true, json: async () => mockRecipes };
             }
-            if (url.includes('/categories')) {
-                return { ok: true, json: async () => mockCategories };
-            }
             return { ok: false, status: 404, json: async () => ({}) };
         });
     });
@@ -69,8 +68,13 @@ describe('Home UI integration', () => {
 
         expect(screen.getByRole('searchbox')).toBeInTheDocument();
 
-        expect(await screen.findByText('Varma rätter')).toBeInTheDocument();
-        expect(screen.findByText('Söta rätter')).toBeInTheDocument();
-        expect(screen.findByText('Kalla rätter')).toBeInTheDocument();
+        const warm = await screen.findAllByRole('link', { name: /Varma rätter/i });
+        const sweet = await screen.findAllByRole('link', { name: /Söta rätter/i });
+        const cold = await screen.findAllByRole('link', { name: /Kalla rätter/i });
+
+        expect(warm.length).toBeGreaterThan(0);
+        expect(sweet.length).toBeGreaterThan(0);
+        expect(cold.length).toBeGreaterThan(0);
+
     });
 });
