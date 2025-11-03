@@ -1,8 +1,30 @@
+import { Navigate, useParams } from 'react-router-dom';
+import CommentSection from '../../components/comment/CommentSection.jsx';
+import { ErrorMessage } from '../../components/common/ErrorMessage.jsx';
+import Rating from '../../components/rating/Rating';
+import Recipe from '../../components/Recipe/Recipe';
+import { useRecipe } from '../../hooks/useRecipe';
+
 function RecipePage() {
+    const { recipeId } = useParams();
+    const { recipe, loading, error } = useRecipe(recipeId);
+
+    if (loading) return <p>Laddar recept</p>;
+    if (error)
+        return (
+            <ErrorMessage
+                title="Kunde inte hämta receptet"
+                error={'Ett oväntat fel uppstod!'}
+            />
+        );
+    if (!recipe) return <Navigate to="/not-found" replace />;
+
     return (
-        <main>
-            <p>Recipe page</p>
-        </main>
+        <div className="recipe-page">
+            <Recipe recipe={recipe} />
+            <Rating />
+            <CommentSection recipeId={recipeId} />
+        </div>
     );
 }
 

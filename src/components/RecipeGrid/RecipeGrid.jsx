@@ -1,49 +1,62 @@
+import { useEffect, useState } from 'react';
+import { useRecipes } from '../../hooks/useRecipes';
 import RecipeCard from '../RecipeCard/RecipeCard';
-import React, { useEffect, useState } from 'react';
-import { getAllRecipes } from '../../utils/getAllRecipes';
-import { getRecipesByCategory } from '../../utils/getRecipesByCategory';
-import { mapApiRecipes } from '../../utils/recipeMappers';
+import { ErrorMessage } from '../common/ErrorMessage';
 
-function RecipeGrid({ category = null, searchQuery = null }) {
-    const [recipes, setRecipes] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+function RecipeGrid({ recipes, searchQuery }) {
+    const [filteredRecipes, setFilteredRecipes] = useState([]);
 
     useEffect(() => {
-        async function fetchRecipes() {
-            try {
-                let data;
+        const searchTerm = (searchQuery || '').trim().toLowerCase();
+        setFilteredRecipes(
+            recipes.filter((r) => r.title.toLowerCase().includes(searchTerm))
+        );
+    }, [recipes, searchQuery]);
 
-                if (category) {
-                    data = await getRecipesByCategory(category);
-                } else if (searchQuery) {
-                    // OBS PLACEHOLDER!!
-                    data = await getAllRecipes(); // ska bytas till getRecipesBySearch(searchQuery) eller liknande
-                } else {
-                    data = await getAllRecipes();
-                }
-
-                const mapped = mapApiRecipes(data);
-                setRecipes(mapped);
-            } catch (err) {
-                setError('Kunde inte hämta recept 😞');
-                console.error(err);
-            } finally {
-                setLoading(false);
-            }
-        }
-        fetchRecipes();
-    }, [category, searchQuery]);
-    if (loading) return <p>Laddar recept, vänta lite!</p>;
-    if (error) return <p>{error}</p>;
+    if (searchQuery && filteredRecipes.length === 0) {
+        return <p>Inga recept matchar din sökning.</p>;
+    }
 
     return (
         <div className="recipe-grid">
-            {recipes.map((recipe) => (
+            {filteredRecipes.map((recipe) => (
                 <RecipeCard key={recipe.id} recipe={recipe} />
             ))}
         </div>
     );
+}
+
+export function RecipeGridContainer({ category, searchQuery }) {
+    const { recipes, loading, error } = useRecipes(category);
+
+    if (loading) return <p>Laddar recept</p>;
+    if (error) {
+        const title = category
+            ? `Kunde inte hämta recepten i kategorin "${category}"`
+            : 'Kunde inte hämta recept';
+
+        return (
+            <ErrorMessage
+                title={title}
+                error="Ett fel uppstod när recepten skulle hämtas. Försök igen senare."
+            />
+        );
+    }
+
+    if (!recipes || recipes.length === 0) {
+        return (
+            <div className="empty-state">
+                <h2>Inga recept!</h2>
+                <p>
+                    {category
+                        ? `Det finns inga recept i kategorin "${category}" just nu.`
+                        : 'Det finns inga recept att visa ännu.'}
+                </p>
+            </div>
+        );
+    }
+
+    return <RecipeGrid recipes={recipes} searchQuery={searchQuery} />;
 }
 
 export default RecipeGrid;

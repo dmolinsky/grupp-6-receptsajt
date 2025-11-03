@@ -1,21 +1,32 @@
+import { Link, useNavigate } from 'react-router-dom';
 import '../../index.css';
-import { Link } from 'react-router-dom';
+import logo from '../../assets/logo_colorAdjust2.png';
 
 function Header() {
+    const navigate = useNavigate();
+
+    const handleTitleClick = (e) => {
+        e.preventDefault();
+        navigate('/', { state: { clearSearch: true } });
+    };
+
     return (
         <header className="header text-center">
-            <h1>Julreceptsajten</h1>
-            <nav className="nav">
-                <Link to="/" className="button">
-                    <span>Hem </span>
+            <h1 className="header-title">
+                <Link to="/" onClick={handleTitleClick} className="title-link">
+                    <img
+                        src={logo}
+                        className="site-logo"
+                        alt="Christmas branch"
+                    />
+                    <span className="logo-text">Julen's Godaste Recept</span>
+                    <img
+                        src={logo}
+                        className="site-logo-right"
+                        alt="Christmas branch"
+                    />
                 </Link>
-                <Link to="/category/Frukost" className="button">
-                    <span>| Kategori frukost </span>
-                </Link>
-                <Link to="/recipe/:recipeId" className="button">
-                    <span>| Recept </span>
-                </Link>
-            </nav>
+            </h1>
         </header>
     );
 }

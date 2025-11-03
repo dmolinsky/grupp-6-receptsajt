@@ -1,13 +1,11 @@
 import { describe, it, expect } from 'vitest';
 
-import { getRecipesByCategory } from 'src/utils/getRecipesByCategory.js';
+import { getRecipesByCategory } from '../getRecipesByCategory.js';
 
-describe('getRecipesByCategory', () => {
+describe('Integration: getRecipesByCategory', () => {
     it('should fetch recipes for a given category', async () => {
-        const category = 'vegetariskt';
+        const category = 'varma rätter';
         const data = await getRecipesByCategory(category);
-
-        // console.log(`Fetched recipes for category "${category}":`, data);
 
         expect(data).not.toBeNull();
         expect(Array.isArray(data)).toBe(true);

@@ -1,3 +1,5 @@
+import { mapMinutesToTimeString } from './timeMapper';
+
 /**
  * Mapping one single recipe from JSON to object
  */
@@ -18,10 +20,10 @@ export function mapApiRecipe(apiRecipe) {
         id: apiRecipe._id,
         title: apiRecipe.title,
         description: apiRecipe.description || '',
-        image: apiRecipe.image_url || '',
+        image: apiRecipe.imageUrl || '',
         category: apiRecipe.category || 'Okänd kategori',
-        cookingTime: apiRecipe.cooking_time || 0,
-        ingredientsCount: apiRecipe.ingredients_count || 0,
+        cookingTime: mapMinutesToTimeString(apiRecipe.timeInMins || 0),
+        ingredientsCount: apiRecipe.ingredients.length || 0,
         rating: averageRating,
         difficulty: difficulty,
     };
@@ -33,4 +35,29 @@ export function mapApiRecipe(apiRecipe) {
 export function mapApiRecipes(apiRecipes) {
     if (!Array.isArray(apiRecipes)) return [];
     return apiRecipes.map(mapApiRecipe).filter((recipe) => recipe !== null);
+}
+
+/**
+ * Mapping list of recipe instructions from JSON to object
+ */
+export function mapApiInstructions(apiInstructions) {
+    if (!apiInstructions || !Array.isArray(apiInstructions)) {
+        return [];
+    }
+
+    const instructions = apiInstructions.slice();
+
+    return instructions;
+}
+
+/**
+ * Mapping list of recipe igredients from JSON to object
+ */
+export function mapApiIngredients(apiIngredients) {
+    if (!Array.isArray(apiIngredients)) return [];
+    return apiIngredients.map((i) => ({
+        name: i.name,
+        amount: i.amount,
+        unit: i.unit,
+    }));
 }
