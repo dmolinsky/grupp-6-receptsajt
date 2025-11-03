@@ -1,5 +1,5 @@
 import { vi, describe, it, beforeEach, afterEach, expect } from 'vitest';
-import { MemoryRouter} from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 import App from '../../App';
 
@@ -68,13 +68,18 @@ describe('Home UI integration', () => {
 
         expect(screen.getByRole('searchbox')).toBeInTheDocument();
 
-        const warm = await screen.findAllByRole('link', { name: /Varma rätter/i });
-        const sweet = await screen.findAllByRole('link', { name: /Söta rätter/i });
-        const cold = await screen.findAllByRole('link', { name: /Kalla rätter/i });
+        const warm = await screen.findAllByRole('link', {
+            name: /Varma rätter/i,
+        });
+        const sweet = await screen.findAllByRole('link', {
+            name: /Söta rätter/i,
+        });
+        const cold = await screen.findAllByRole('link', {
+            name: /Kalla rätter/i,
+        });
 
         expect(warm.length).toBeGreaterThan(0);
         expect(sweet.length).toBeGreaterThan(0);
         expect(cold.length).toBeGreaterThan(0);
-
     });
 });

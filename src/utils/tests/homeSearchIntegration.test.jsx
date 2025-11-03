@@ -4,7 +4,6 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from '../../App';
 
-
 const mockRecipes = [
     {
         _id: 1,
@@ -43,7 +42,7 @@ function renderHome() {
         <MemoryRouter initialEntries={['/']}>
             <App />
         </MemoryRouter>
-    )
+    );
 }
 
 describe('Home search integration', () => {
@@ -59,7 +58,7 @@ describe('Home search integration', () => {
             if (url.includes('/categories')) {
                 return { ok: true, json: async () => [] };
             }
-            return { ok: false, status: 404, json: async () => ({}), };
+            return { ok: false, status: 404, json: async () => ({}) };
         });
     });
 
@@ -81,7 +80,9 @@ describe('Home search integration', () => {
         expect(screen.queryByAltText('Lussebullar')).not.toBeInTheDocument();
         expect(screen.queryByAltText('Rödbetssallad')).not.toBeInTheDocument();
 
-        const clearButton = await screen.findByRole('button', { name: /rensa sökning/i });
+        const clearButton = await screen.findByRole('button', {
+            name: /rensa sökning/i,
+        });
         await userEvent.click(clearButton);
 
         expect(await screen.findByAltText('Julskinka')).toBeInTheDocument();
