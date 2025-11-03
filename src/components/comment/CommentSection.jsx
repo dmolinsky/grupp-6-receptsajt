@@ -87,6 +87,10 @@ function CommentSection({ recipeId }) {
                 </p>
             )}
 
+                <h3 className="comment-section__title">
+                    Tidigare kommentarer
+                </h3>
+
             <CommentList comments={comments} />
         </section>
     );
