@@ -1,9 +1,9 @@
-import { describe, expect, it } from 'vitest';
-import { getRecipesByCategory } from '../../utils/getRecipesByCategory.js';
+import { describe, it, expect } from 'vitest';
 
-describe('getRecipesByCategory', () => {
-    // TODO: Enable this test after adding a fetch mock
-    it.skip('should fetch recipes for a given category', async () => {
+import { getRecipesByCategory } from '../getRecipesByCategory.js';
+
+describe('Integration: getRecipesByCategory', () => {
+    it('should fetch recipes for a given category', async () => {
         const category = 'varma rätter';
         const data = await getRecipesByCategory(category);
 
