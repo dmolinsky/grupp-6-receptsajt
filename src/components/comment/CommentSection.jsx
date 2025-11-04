@@ -62,38 +62,37 @@ function CommentSection({ recipeId }) {
         }
     }
 
-   return (
-    <section
-        className="comment-section"
-        aria-labelledby="comments-title"
-        data-recipe-id={recipeId}
-    >
-        {showForm && (
-            <h2 id="comments-title" className="comment-section__title">
-                Kommentarer
-            </h2>
-        )}
+    return (
+        <section
+            className="comment-section"
+            aria-labelledby="comments-title"
+            data-recipe-id={recipeId}
+        >
+            {showForm && (
+                <h2 id="comments-title" className="comment-section__title">
+                    Kommentarer
+                </h2>
+            )}
 
-        {showForm && <CommentForm onSubmit={handleAddComment} />}
+            {showForm && <CommentForm onSubmit={handleAddComment} />}
 
-        {flash && (
-            <p className="comment-form__flash" role="status">
-                {flash}
-            </p>
-        )}
+            {flash && (
+                <p className="comment-form__flash" role="status">
+                    {flash}
+                </p>
+            )}
 
-        {error && (
-            <p className="comment-form__error" role="alert">
-                {error}
-            </p>
-        )}
+            {error && (
+                <p className="comment-form__error" role="alert">
+                    {error}
+                </p>
+            )}
 
-        <h3 className="comment-section__title">Tidigare kommentarer</h3>
+            <h3 className="comment-section__title">Tidigare kommentarer</h3>
 
-        <CommentList comments={comments} />
-    </section>
-);
-
+            <CommentList comments={comments} />
+        </section>
+    );
 }
 
 CommentSection.propTypes = {
