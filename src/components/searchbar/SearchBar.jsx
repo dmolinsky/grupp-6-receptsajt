@@ -25,8 +25,6 @@ function SearchBar({ defaultValue = '', onSearch }) {
         onSearch?.('');
     };
 
-    const hasError = Boolean(error);
-
     return (
         <form className="searchbar" noValidate onSubmit={handleSubmit}>
             <div className="searchbar__control">
@@ -40,7 +38,7 @@ function SearchBar({ defaultValue = '', onSearch }) {
                     placeholder="Sök bland dina favoritrecept"
                     value={value}
                     onChange={(e) => setValue(e.target.value)}
-                    aria-invalid={hasError ? 'true' : 'false'}
+                    aria-invalid={error ? 'true' : 'false'}
                     aria-describedby="search-error"
                 />
 
@@ -60,7 +58,7 @@ function SearchBar({ defaultValue = '', onSearch }) {
             <div
                 id="searchbar-error"
                 className="searchbar__error"
-                role={hasError ? 'alert' : undefined}
+                role={error ? 'alert' : undefined}
             >
                 {error}
             </div>

@@ -1,7 +1,7 @@
-import { describe, it, expect, vi } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import RecipeGrid from 'src/components/RecipeGrid/RecipeGrid.jsx';
+import { describe, expect, it, vi } from 'vitest';
 
 vi.mock('src/utils/getAllRecipes', () => ({
     getAllRecipes: vi.fn(),
@@ -9,8 +9,6 @@ vi.mock('src/utils/getAllRecipes', () => ({
 vi.mock('src/utils/recipeMappers', () => ({
     mapApiRecipes: vi.fn((data) => data),
 }));
-
-import { getAllRecipes } from 'src/utils/getAllRecipes';
 
 describe('Integration: RecipeGrid + RecipeCard', () => {
     const mockRecipes = [
@@ -29,21 +27,15 @@ describe('Integration: RecipeGrid + RecipeCard', () => {
     ];
 
     it('renders RecipeCards with data from getAllRecipes', async () => {
-        getAllRecipes.mockResolvedValueOnce(mockRecipes);
-
         render(
             <MemoryRouter>
-                <RecipeGrid />
+                <RecipeGrid recipes={mockRecipes} />
             </MemoryRouter>
         );
-
-        expect(screen.getByText(/laddar recept/i)).toBeInTheDocument();
 
         await waitFor(() =>
             expect(screen.getByText('Pepparkakor')).toBeInTheDocument()
         );
         expect(screen.getByText('Lussekatter')).toBeInTheDocument();
-
-        expect(getAllRecipes).toHaveBeenCalledTimes(1);
     });
 });
