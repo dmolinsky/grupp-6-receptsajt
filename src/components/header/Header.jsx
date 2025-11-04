@@ -19,7 +19,7 @@ function Header() {
                         className="site-logo"
                         alt="Christmas branch"
                     />
-                    <span className="logo-text">Julen's Godaste Recept</span>
+                    <span className="logo-text">Julens Godaste Recept</span>
                     <img
                         src={logo}
                         className="site-logo-right"
