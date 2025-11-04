@@ -1,9 +1,32 @@
-import './Header.css';
+import { Link, useNavigate } from 'react-router-dom';
+import '../../index.css';
+import logo from '../../assets/logo_colorAdjust2.png';
 
 function Header() {
+    const navigate = useNavigate();
+
+    const handleTitleClick = (e) => {
+        e.preventDefault();
+        navigate('/', { state: { clearSearch: true } });
+    };
+
     return (
-        <header className="header">
-            <h1>TEST</h1>
+        <header className="header text-center">
+            <h1 className="header-title">
+                <Link to="/" onClick={handleTitleClick} className="title-link">
+                    <img
+                        src={logo}
+                        className="site-logo"
+                        alt="Christmas branch"
+                    />
+                    <span className="logo-text">Julens Godaste Recept</span>
+                    <img
+                        src={logo}
+                        className="site-logo-right"
+                        alt="Christmas branch"
+                    />
+                </Link>
+            </h1>
         </header>
     );
 }
