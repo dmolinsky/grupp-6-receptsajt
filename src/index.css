@@ -813,7 +813,10 @@ input {
     transition:
         box-shadow 120ms ease,
         border-color 120ms ease;
+    font-size: 1rem !important;  
+    line-height: 1.4;            
 }
+
 
 .comment-form__textarea {
     min-height: 8rem;
