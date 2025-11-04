@@ -161,7 +161,7 @@ button:hover {
 .searchbar {
     position: relative;
     width: 100%;
-   margin: var(--spacing-xs) auto 0;
+    margin: var(--spacing-xs) auto 0;
     padding: 0;
 }
 
@@ -1111,5 +1111,3 @@ footer small {
     gap: var(--spacing-xs);
     margin-bottom: var(--spacing-xs);
 }
-
-
