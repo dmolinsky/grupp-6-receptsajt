@@ -43,14 +43,14 @@ function validateText(text, touched) {
     if (INVALID_TAGS.test(trimmed)) {
         return 'Kommentaren får inte innehålla HTML-taggar eller andra otillåtna tecken.';
     }
-    if (INVALID_TEXT.test(trimmed)) {
-        return 'Kommentaren innehåller otillåtna tecken.';
+    if (INVALID_LINKS.test(trimmed)) {
+        return 'Kommentaren får inte innehålla länkar.';
     }
     if (INVALID_NEWLINES.test(normalized)) {
         return 'Kommentaren får inte innehålla för många radbrytningar.';
     }
-    if (INVALID_LINKS.test(trimmed)) {
-        return 'Kommentaren får inte innehålla länkar.';
+    if (INVALID_TEXT.test(trimmed)) {
+        return 'Kommentaren får inte innehålla otillåtna tecken.';
     }
     return null;
 }

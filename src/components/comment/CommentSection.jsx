@@ -51,7 +51,7 @@ function CommentSection({ recipeId }) {
             setFlash('Tack för din kommentar!');
         } catch (err) {
             console.error('Kunde inte spara kommentaren:', err);
-            setError('Kunde inte spara kommentaren. :( Försök igen.');
+            setError('Kunde inte spara kommentaren. :( Försök igen. ');
         }
     }
 

@@ -14,9 +14,17 @@ function Header() {
         <header className="header text-center">
             <h1 className="header-title">
                 <Link to="/" onClick={handleTitleClick} className="title-link">
-                    <img src={logo} className="site-logo" />
+                    <img
+                        src={logo}
+                        className="site-logo"
+                        alt="Christmas branch"
+                    />
                     <span className="logo-text">Julen's Godaste Recept</span>
-                    <img src={logo} className="site-logo-right" />
+                    <img
+                        src={logo}
+                        className="site-logo-right"
+                        alt="Christmas branch"
+                    />
                 </Link>
             </h1>
         </header>
