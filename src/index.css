@@ -161,7 +161,7 @@ button:hover {
 .searchbar {
     position: relative;
     width: 100%;
-    margin: var(--spacing-md) auto var(--spacing-lg);
+   margin: var(--spacing-xs) auto 0;
     padding: 0;
 }
 
@@ -1104,3 +1104,12 @@ footer small {
     text-align: center;
     padding-top: var(--spacing-lg);
 }
+
+.home__filter-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-xs);
+}
+
+

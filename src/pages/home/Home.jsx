@@ -20,11 +20,14 @@ function Home() {
 
     return (
         <main className="home">
-            <CategoryList />
-            <SearchBar key={searchbarKey} onSearch={setSearchQuery} />
+            <div className="home__filter-section">
+                <CategoryList />
+                <SearchBar key={searchbarKey} onSearch={setSearchQuery} />
+            </div>
+
             <div className="searchbar__reset-wrapper">
                 {hasActiveSearch && (
-                    <button
+                    <button 
                         className="searchbar__reset"
                         onClick={() => {
                             setSearchQuery('');
@@ -42,3 +45,4 @@ function Home() {
 }
 
 export default Home;
+
