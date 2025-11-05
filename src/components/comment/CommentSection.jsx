@@ -80,6 +80,7 @@ function CommentSection({ recipeId }) {
                     {flash}
                 </p>
             )}
+
             {error && (
                 <p className="comment-form__error" role="alert">
                     {error}
