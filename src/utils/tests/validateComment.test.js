@@ -35,7 +35,9 @@ describe('validateComment', () => {
             text: '<script>alert("x")</script>',
             touched: { name: true, text: true },
         });
-        expect(result.text).toBe('Kommentaren innehåller otillåtna tecken.');
+        expect(result.text).toBe(
+            'Kommentaren får inte innehålla HTML-taggar eller andra otillåtna tecken.'
+        );
     });
 
     test('returns error if name contains invalid characters', () => {

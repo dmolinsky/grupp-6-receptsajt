@@ -75,7 +75,6 @@ function CommentSection({ recipeId }) {
             )}
 
             {showForm && <CommentForm onSubmit={handleAddComment} />}
-
             {flash && (
                 <p className="comment-form__flash" role="status">
                     {flash}

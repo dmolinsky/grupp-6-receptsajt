@@ -1,5 +1,8 @@
 import { test, expect } from '@playwright/test';
 
+// ---------------------------
+//  Startsidan / Receptflöde
+// ---------------------------
 test.describe('Startsida - Receptflöde', () => {
     const baseUrl = '/'; // ingen aning om path är rätt
 
@@ -30,6 +33,13 @@ test.describe('Startsida - Receptflöde', () => {
             page.locator('.category-list').filter({ hasText: 'Varma rätter' })
         ).toBeVisible();
     });
+});
+
+// ---------------------------
+//  Sökfunktion
+// ---------------------------
+test.describe('Sökfunktion - filtrering och reset', () => {
+    const baseUrl = '/';
 
     //Test 3
     test('filtrerar receptlistan vid sökning på "jul"', async ({ page }) => {
@@ -110,26 +120,21 @@ test.describe('Startsida - Receptflöde', () => {
             .allTextContents();
         expect(newTitles.sort()).not.toEqual(savedTitles.sort()); // testa att receptlistan är samma som tidigare
     });
+});
 
-    //1
-    // hämtar alla recept på startsidan
-    // skriv in "gröt"
-    // efter sök ska receptlistan visa en filtrerad lista
-    // page.locator för att hitta search bar
-    // .type('gröt') in input lr update på input value
-    // await -> sen räkna hur många recept som finns
+// ---------------------------
+//  Säkerhet / XSS
+// ---------------------------
+test.describe('Säkerhet - XSS skydd', () => {
+    test('kollar om XSS skyddas', async ({ page }) => {
+        let alertTriggered = false;
+        page.on('dialog', () => {
+            alertTriggered = true;
+        });
 
-    //2
-    // rensar alla visa igen
-    // input value  clear, gå tillbaka till startsidan inte reload
-    // en ny await å sen räkna om receptlistan ska visa alla recept
+        await page.goto('/?q=<script>alert(1)</script>');
+        await page.waitForTimeout(500);
 
-    //3
-    // hämtar alla recept på startsidan
-    // skriv in "gröt"
-    // efter sök ska receptlistan visa en filtrerad lista
-    // spara vilka recept du får
-    // hittar url i webbrowser
-    // goToPage på hittad url för att se om det finns kvar efter reload
-    // compare på sparad recept mot url
+        expect(alertTriggered).toBe(false);
+    });
 });

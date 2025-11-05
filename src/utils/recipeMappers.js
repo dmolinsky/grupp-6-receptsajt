@@ -1,4 +1,5 @@
 import { mapMinutesToTimeString } from './timeMapper';
+import textSanitizer from './textSanitizer';
 
 /**
  * Mapping one single recipe from JSON to object
@@ -18,10 +19,10 @@ export function mapApiRecipe(apiRecipe) {
 
     return {
         id: apiRecipe._id,
-        title: apiRecipe.title,
-        description: apiRecipe.description || '',
-        image: apiRecipe.imageUrl || '',
-        category: apiRecipe.category || 'Okänd kategori',
+        title: textSanitizer(apiRecipe.title),
+        description: textSanitizer(apiRecipe.description || ''),
+        image: textSanitizer(apiRecipe.imageUrl || ''),
+        category: textSanitizer(apiRecipe.category || 'Okänd kategori'),
         cookingTime: mapMinutesToTimeString(apiRecipe.timeInMins || 0),
         ingredientsCount: apiRecipe.ingredients.length || 0,
         rating: averageRating,
