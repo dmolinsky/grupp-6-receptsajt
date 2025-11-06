@@ -161,7 +161,7 @@ button:hover {
 .searchbar {
     position: relative;
     width: 100%;
-    margin: var(--spacing-md) auto var(--spacing-lg);
+    margin: var(--spacing-xs) auto 0;
     padding: 0;
 }
 
@@ -817,6 +817,8 @@ input {
     transition:
         box-shadow 120ms ease,
         border-color 120ms ease;
+    font-size: 1rem !important;
+    line-height: 1.4;
 }
 
 .comment-form__textarea {
@@ -1107,4 +1109,11 @@ footer small {
 .empty-state {
     text-align: center;
     padding-top: var(--spacing-lg);
+}
+
+.home__filter-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-xs);
 }
